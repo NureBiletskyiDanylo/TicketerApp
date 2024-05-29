@@ -15,6 +15,7 @@ namespace TicketerApp.ModelRenderers
         public ConfirmationRenderer(StackLayout layout)
         {
             _stackLayout = layout;
+            _confirmations.Add(new Confirmation { PaymentId = 1, CorrectConfirmationAnswer = 123, EventTitle = "Event 1", PriceToPay = 49.99f, MfaRequired = true, MfaCode = "ABC123" });
         }
 
         public void Render()
@@ -26,7 +27,7 @@ namespace TicketerApp.ModelRenderers
 
             if (_confirmations.Count > 0)
             {
-                ListView listView = new ListView();
+                ListView listView = ListViewDesign.CreateStyledListView(_confirmations);
                 listView.ItemsSource = _confirmations;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(listView);

@@ -12,7 +12,8 @@
                 </Style>
                 <Style TargetType="Label" x:Key="header">
                     <Setter Property="FontSize" Value="25"></Setter>
-                    <Setter Property="TextColor" Value="Black"></Setter>
+                    <Setter Property="TextColor" Value="#6495ED"></Setter>
+                    <Setter Property="FontAttributes" Value="Bold" />
                 </Style>
                 <Style TargetType="StackLayout" x:Key="headerLayout">
                     <Setter Property="HorizontalOptions" Value="Center"></Setter>
@@ -20,7 +21,7 @@
                 </Style>
             </ResourceDictionary>
         </xct:TabView.Resources>
-        <xct:TabViewItem Text="Tickets" BackgroundColor="DeepSkyBlue">
+        <xct:TabViewItem Text="Tickets" BackgroundColor="#87CEFA" FontSize="15" TextColor="#FFFFFF" FontAttributes="Bold">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -35,7 +36,7 @@
                 </Grid>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
-        <xct:TabViewItem Text="Confirmation" BackgroundColor="DeepSkyBlue">
+        <xct:TabViewItem Text="Confirmation" BackgroundColor="#87CEFA" FontSize="15" TextColor="#FFFFFF" FontAttributes="Bold">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -50,7 +51,7 @@
                 </Grid>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
-        <xct:TabViewItem Text="Settings" BackgroundColor="DeepSkyBlue">
+        <xct:TabViewItem Text="Settings" BackgroundColor="#87CEFA" FontSize="15" TextColor="#FFFFFF" FontAttributes="Bold">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -86,7 +87,7 @@
                         </StackLayout>
                     </Grid>
                     <StackLayout  Grid.Row="3">
-                        <Button Text="Log out" BackgroundColor="#f94449" Margin="30,0,30,30"></Button>
+                        <Button Text="Log out" TextColor="White" BackgroundColor="#6495ED" Margin="30,0,30,30" BorderColor="White" CornerRadius="50" Scale="0.8"></Button>
                     </StackLayout>
                 </Grid>
             </xct:TabViewItem.Content>

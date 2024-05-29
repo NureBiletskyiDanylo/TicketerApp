@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TicketerApp.App">
     <Application.Resources>
-
+        <Style x:Key="header" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
     </Application.Resources>
 </Application>
