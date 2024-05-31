@@ -11,10 +11,12 @@ namespace TicketerApp.ModelRenderers
     public class ConfirmationRenderer
     {
         private ObservableCollection<Confirmation> _confirmations = new ObservableCollection<Confirmation>();
+        private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
-        public ConfirmationRenderer(StackLayout layout)
+        public ConfirmationRenderer(StackLayout layout, Style style)
         {
             _stackLayout = layout;
+            _plainTextRenderer = new PlainTextRenderer("There are no confirmation requests", style);
         }
 
         public void Render()
@@ -33,8 +35,7 @@ namespace TicketerApp.ModelRenderers
             }
             else
             {
-                Label noConfirmLabel = new Label();
-                noConfirmLabel.Text = "There are no confirmation requests";
+                Label noConfirmLabel = _plainTextRenderer.Label;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(noConfirmLabel);
             }

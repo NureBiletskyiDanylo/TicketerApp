@@ -3,6 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TicketerApp.App">
     <Application.Resources>
+        <Color x:Key="backgroundTabViewBright">#e5e5e5</Color>
+        <Color x:Key="backgroundTabViewDark">#2f333c</Color>
+        <Color x:Key="backgroundTabViewDefault">#e5e5e5</Color>
 
+        <Color x:Key="backgroundTabViewItemBright">DeepSkyBlue</Color>
+        <Color x:Key="backgroundTabViewItemDark">#24272e</Color>
+        <Color x:Key="backgroundTabViewItemDefault">DeepSkyBlue</Color>
+
+        <Color x:Key="headerAndPlainTextColorBright">Black</Color>
+        <Color x:Key="headerAndPlainTextColorDark">#828a9a</Color>
+        <Color x:Key="headerAndPlainTextColorDefault">Black</Color>
+
+        <Color x:Key="ButtonsBackgroundBright">#cdcdcd</Color>
+        <Color x:Key="ButtonsBackgroundDark">#24272E</Color>
+
+        <Color x:Key="ButtonsTextColorBright">Black</Color>
+        <Color x:Key="ButtonsTextColorDark">#828a9a</Color>
     </Application.Resources>
 </Application>
