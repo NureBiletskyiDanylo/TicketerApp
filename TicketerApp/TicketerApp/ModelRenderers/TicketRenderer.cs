@@ -19,7 +19,7 @@ namespace TicketerApp.ModelRenderers
             _plainTextRenderer = new PlainTextRenderer("There are no tickets", style);
         }
 
-        public void Render(Style listViewStyle, Style boxViewStyle)
+        public void Render(Style listViewStyle, (Style, Style) boxViewStyles)
         {
             if (_stackLayout == null)
             {
@@ -47,7 +47,7 @@ namespace TicketerApp.ModelRenderers
             _tickets.Add(ticket2);
             if (_tickets.Count > 0)
             {
-                ListView listView = TicketListViewDesign.CreateStyledTicketListView(_tickets, boxViewStyle);
+                ListView listView = TicketListViewDesign.CreateStyledTicketListView(_tickets, boxViewStyles);
                 listView.Style = listViewStyle;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(listView);

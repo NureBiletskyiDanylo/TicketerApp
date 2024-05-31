@@ -41,6 +41,10 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonBackgroundDark}, Default={StaticResource logOutButtonBackgroundBright}, Light={StaticResource logOutButtonBackgroundBright}}"></Setter>
                 <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonTextColorDark}, Default={StaticResource logOutButtonTextColorBright}, Light={StaticResource logOutButtonTextColorBright}}"></Setter>
             </Style>
+
+            <Style TargetType="BoxView" x:Key="BoxViewBottomBorder">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource boxViewBottomBorderDark}, Default={StaticResource boxViewBottomBorderBright}, Light={StaticResource boxViewBottomBorderBright}}"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <xct:TabView Style="{StaticResource TabViewStyle}">

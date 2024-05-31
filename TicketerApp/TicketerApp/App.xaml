@@ -39,5 +39,8 @@
 
         <Color x:Key="ticketBoxViewBackgroundColorDark">#20232a</Color>
         <Color x:Key="ticketBoxViewBackgroundColorBright">#1E90FF</Color>
+
+        <Color x:Key="boxViewBottomBorderDark">#eeba2c</Color>
+        <Color x:Key="boxViewBottomBorderBright">Black</Color>
     </Application.Resources>
 </Application>

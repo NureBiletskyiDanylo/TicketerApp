@@ -7,7 +7,7 @@ namespace TicketerApp.ModelRenderers
 
     public static class TicketListViewDesign
     {
-        public static ListView CreateStyledTicketListView<T>(ObservableCollection<T> tickets, Style boxViewStyle)
+        public static ListView CreateStyledTicketListView<T>(ObservableCollection<T> tickets, (Style, Style) boxViewStyles)
         {
             var listView = new ListView
             {
@@ -16,7 +16,7 @@ namespace TicketerApp.ModelRenderers
                 {
                     var boxViewBackground = new BoxView
                     {
-                        Style = boxViewStyle,
+                        Style = boxViewStyles.Item2,
                         Opacity = 0.5 // Уменьшаем немного прозрачность фона
                     };
 
@@ -58,6 +58,13 @@ namespace TicketerApp.ModelRenderers
 
                     var absoluteLayout = new AbsoluteLayout();
 
+                    var bottomBorder = new BoxView
+                    {
+                        HeightRequest = 1,
+                        Style = boxViewStyles.Item1,
+                    };
+                    AbsoluteLayout.SetLayoutFlags(bottomBorder, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
+                    AbsoluteLayout.SetLayoutBounds(bottomBorder, new Rectangle(0, 1, 1, AbsoluteLayout.AutoSize));
                     AbsoluteLayout.SetLayoutFlags(grid, AbsoluteLayoutFlags.All);
                     AbsoluteLayout.SetLayoutBounds(grid, new Rectangle(0, 0, 1, 1));
                     AbsoluteLayout.SetLayoutFlags(boxViewBackground, AbsoluteLayoutFlags.All);
@@ -65,6 +72,7 @@ namespace TicketerApp.ModelRenderers
 
                     absoluteLayout.Children.Add(boxViewBackground);
                     absoluteLayout.Children.Add(grid);
+                    absoluteLayout.Children.Add(bottomBorder);
 
                     return new ViewCell { View = absoluteLayout };
                 }),
