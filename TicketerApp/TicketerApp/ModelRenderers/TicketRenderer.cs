@@ -10,11 +10,13 @@ namespace TicketerApp.ModelRenderers
     public class TicketRenderer
     {
         private ObservableCollection<Ticket> _tickets = new ObservableCollection<Ticket>();
+        private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
 
-        public TicketRenderer(StackLayout layout)
+        public TicketRenderer(StackLayout layout, Style style)
         {
             _stackLayout = layout;
+            _plainTextRenderer = new PlainTextRenderer("There are no tickets", style);
         }
 
         public void Render()
@@ -43,8 +45,7 @@ namespace TicketerApp.ModelRenderers
             }
             else
             {
-                Label noTicketLabel = new Label();
-                noTicketLabel.Text = "There are no tickets";
+                Label noTicketLabel = _plainTextRenderer.Label;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(noTicketLabel);
             }

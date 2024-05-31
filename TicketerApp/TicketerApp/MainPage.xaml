@@ -1,14 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage  xmlns:c="clr-namespace:TicketerApp" xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TicketerApp.MainPage"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core">
-    <xct:TabView TabStripPlacement="Bottom">
+<ContentPage
+    x:Class="TicketerApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:c="clr-namespace:TicketerApp"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--  Tab view and tab view item styles  -->
+            <Style x:Key="TabViewStyle" TargetType="xct:TabView">
+                <Setter Property="TabStripPlacement" Value="Bottom" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Light={StaticResource backgroundTabViewBright}, Default={StaticResource backgroundTabViewDefault}}" />
+            </Style>
+            <Style x:Key="TabViewItemStyle" TargetType="xct:TabViewItem">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerAndPlainTextColorDark}, Light={StaticResource headerAndPlainTextColorBright}, Default={StaticResource headerAndPlainTextColorDefault}}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewItemDark}, Light={StaticResource backgroundTabViewItemBright}, Default={StaticResource backgroundTabViewItemDefault}}" />
+            </Style>
+            <!--  Header style  -->
+            <Style x:Key="header" TargetType="Label">
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerAndPlainTextColorDark}, Light={StaticResource headerAndPlainTextColorBright}, Default={StaticResource headerAndPlainTextColorDefault}}" />
+            </Style>
+
+            <Style x:Key="PlainTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerAndPlainTextColorDark}, Light={StaticResource headerAndPlainTextColorBright}, Default={StaticResource headerAndPlainTextColorDefault}}" />
+            </Style>
+
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ButtonsBackgroundDark}, Default={StaticResource ButtonsBackgroundBright},Light={StaticResource ButtonsBackgroundBright}}"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource ButtonsTextColorDark}, Default={StaticResource ButtonsTextColorBright},Light={StaticResource ButtonsTextColorBright}}"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <xct:TabView Style="{StaticResource TabViewStyle}">
         <xct:TabView.Resources>
             <ResourceDictionary>
-                <Style TargetType="Grid" x:Key="settingsGridStyle">
-                    <Setter Property="Margin" Value="10,10,0,10"></Setter>
+                <Style x:Key="settingsGridStyle" TargetType="Grid">
+                    <Setter Property="Margin" Value="10,10,0,10" />
                 </Style>
                 <Style TargetType="Label" x:Key="header">
                     <Setter Property="FontSize" Value="25"></Setter>
@@ -19,71 +48,86 @@
                     <Setter Property="HorizontalOptions" Value="Center"></Setter>
                     <Setter Property="Orientation" Value="Horizontal"></Setter>
                 </Style>
+                <Style x:Key="headerLayout" TargetType="StackLayout">
+                    <Setter Property="HorizontalOptions" Value="Center" />
+                    <Setter Property="Orientation" Value="Horizontal" />
+                </Style>
             </ResourceDictionary>
         </xct:TabView.Resources>
-        <xct:TabViewItem Text="Tickets" BackgroundColor="#87CEFA" FontSize="15" TextColor="#FFFFFF" FontAttributes="Bold">
+        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Tickets">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Row="0" Style="{StaticResource headerLayout}">
-                        <Label Text="Tickets" Style="{StaticResource header}"></Label>
+                        <Label Style="{StaticResource header}" Text="Tickets" />
                     </StackLayout>
-                    <StackLayout Grid.Row="1" x:Name="TicketsGridList">
-                    </StackLayout>
+                    <StackLayout x:Name="TicketsGridList" Grid.Row="1" />
                 </Grid>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
-        <xct:TabViewItem Text="Confirmation" BackgroundColor="#87CEFA" FontSize="15" TextColor="#FFFFFF" FontAttributes="Bold">
+        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Confirmation">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <StackLayout Grid.Row="0"  Style="{StaticResource headerLayout}">
-                        <Label Text="Confirmation" Style="{StaticResource header}"></Label>
+                    <StackLayout Grid.Row="0" Style="{StaticResource headerLayout}">
+                        <Label Style="{StaticResource header}" Text="Confirmation" />
                     </StackLayout>
-                    <StackLayout Grid.Row="1" x:Name="ConfirmationGridList">
-                    </StackLayout>
+                    <StackLayout x:Name="ConfirmationGridList" Grid.Row="1" />
                 </Grid>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
-        <xct:TabViewItem Text="Settings" BackgroundColor="#87CEFA" FontSize="15" TextColor="#FFFFFF" FontAttributes="Bold">
+        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Settings">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <StackLayout Style="{StaticResource headerLayout}">
-                        <Label Text="Settings" Style="{StaticResource header}"></Label>
+                        <Label Style="{StaticResource header}" Text="Settings" />
                     </StackLayout>
                     <Grid Grid.Row="1" Style="{StaticResource settingsGridStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Text="Themes:"></Label>
+                        <Label
+                            Grid.Row="0"
+                            Style="{StaticResource PlainTextStyle}"
+                            Text="Themes:" />
                         <StackLayout Grid.Row="1" Orientation="Horizontal">
-                            <Button Text="Default" BackgroundColor="#E6E6E6" TextColor="#023E8A"></Button>
-                            <Button Text="Bright" BackgroundColor="#EFDCCC"></Button>
-                            <Button Text="Dark" BackgroundColor="#24272E" TextColor="#828A9A"></Button>
+                            <Button
+                                x:Name="bright"
+                                BackgroundColor="#cdcdcd"
+                                Text="Bright"
+                                TextColor="Black" />
+                            <Button
+                                x:Name="dark"
+                                BackgroundColor="#24272E"
+                                Text="Dark"
+                                TextColor="#828A9A" />
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="2" Style="{StaticResource settingsGridStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Text="Languages:"></Label>
+                        <Label
+                            Grid.Row="0"
+                            Style="{StaticResource PlainTextStyle}"
+                            Text="Languages:" />
                         <StackLayout Grid.Row="1" Orientation="Horizontal">
-                            <Button Text="English"></Button>
-                            <Button Text="Ukrainian"></Button>
+                            <Button Text="English"  Style="{StaticResource ButtonStyle}"/>
+                            <Button Text="Ukrainian" Style="{StaticResource ButtonStyle}"/>
                         </StackLayout>
                     </Grid>
                     <StackLayout  Grid.Row="3">
