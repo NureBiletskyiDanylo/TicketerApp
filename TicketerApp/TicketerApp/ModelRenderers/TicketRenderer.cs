@@ -25,10 +25,20 @@ namespace TicketerApp.ModelRenderers
             {
                 throw new ArgumentNullException(nameof(_stackLayout));
             }
+            // Создаем один билет
+            Ticket ticket = new Ticket
+            {
+                startTime = new DateTime(2024, 5, 10, 14, 30, 0),
+                endTime = new DateTime(2024, 5, 10, 16, 30, 0),
+                name = "Sample Event",
+                price = 50.0f
+            };
 
+            // Добавляем билет в коллекцию
+            _tickets.Add(ticket);
             if (_tickets.Count > 0)
             {
-                ListView listView = new ListView();
+                ListView listView = TicketListViewDesign.CreateStyledTicketListView(_tickets);
                 listView.ItemsSource = _tickets;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(listView);

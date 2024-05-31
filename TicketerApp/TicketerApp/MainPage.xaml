@@ -39,7 +39,15 @@
                 <Style x:Key="settingsGridStyle" TargetType="Grid">
                     <Setter Property="Margin" Value="10,10,0,10" />
                 </Style>
-
+                <Style TargetType="Label" x:Key="header">
+                    <Setter Property="FontSize" Value="25"></Setter>
+                    <Setter Property="TextColor" Value="#6495ED"></Setter>
+                    <Setter Property="FontAttributes" Value="Bold" />
+                </Style>
+                <Style TargetType="StackLayout" x:Key="headerLayout">
+                    <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                    <Setter Property="Orientation" Value="Horizontal"></Setter>
+                </Style>
                 <Style x:Key="headerLayout" TargetType="StackLayout">
                     <Setter Property="HorizontalOptions" Value="Center" />
                     <Setter Property="Orientation" Value="Horizontal" />
@@ -122,11 +130,8 @@
                             <Button Text="Ukrainian" Style="{StaticResource ButtonStyle}"/>
                         </StackLayout>
                     </Grid>
-                    <StackLayout Grid.Row="3">
-                        <Button
-                            Margin="30,0,30,30"
-                            BackgroundColor="#f94449"
-                            Text="Log out" />
+                    <StackLayout  Grid.Row="3">
+                        <Button Text="Log out" TextColor="White" BackgroundColor="#6495ED" Margin="30,0,30,30" BorderColor="White" CornerRadius="50" Scale="0.8"></Button>
                     </StackLayout>
                 </Grid>
             </xct:TabViewItem.Content>
