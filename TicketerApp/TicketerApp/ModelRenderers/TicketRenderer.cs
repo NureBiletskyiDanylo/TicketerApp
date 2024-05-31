@@ -19,7 +19,7 @@ namespace TicketerApp.ModelRenderers
             _plainTextRenderer = new PlainTextRenderer("There are no tickets", style);
         }
 
-        public void Render()
+        public void Render(Style listViewStyle, Style boxViewStyle)
         {
             if (_stackLayout == null)
             {
@@ -34,12 +34,21 @@ namespace TicketerApp.ModelRenderers
                 price = 50.0f
             };
 
+            Ticket ticket2 = new Ticket
+            {
+                startTime = new DateTime(2024, 5, 10, 14, 30, 0),
+                endTime = new DateTime(2024, 5, 10, 16, 30, 0),
+                name = "Sample Event",
+                price = 50.0f
+            };
+
             // Добавляем билет в коллекцию
             _tickets.Add(ticket);
+            _tickets.Add(ticket2);
             if (_tickets.Count > 0)
             {
-                ListView listView = TicketListViewDesign.CreateStyledTicketListView(_tickets);
-                listView.ItemsSource = _tickets;
+                ListView listView = TicketListViewDesign.CreateStyledTicketListView(_tickets, boxViewStyle);
+                listView.Style = listViewStyle;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(listView);
             }

@@ -20,7 +20,7 @@ namespace TicketerApp.ModelRenderers
             _plainTextRenderer = new PlainTextRenderer("There are no confirmation requests", style);
         }
 
-        public void Render()
+        public void Render(Style listViewStyle, Style boxViewStyle)
         {
             if (_stackLayout == null)
             {
@@ -29,8 +29,8 @@ namespace TicketerApp.ModelRenderers
 
             if (_confirmations.Count > 0)
             {
-                ListView listView = ListViewDesign.CreateStyledListView(_confirmations);
-                listView.ItemsSource = _confirmations;
+                ListView listView = ConfirmationListViewDesign.CreateStyledListView(_confirmations, boxViewStyle);
+                listView.Style = listViewStyle;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(listView);
             }

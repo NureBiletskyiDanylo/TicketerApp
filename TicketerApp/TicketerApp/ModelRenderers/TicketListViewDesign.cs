@@ -7,7 +7,7 @@ namespace TicketerApp.ModelRenderers
 
     public static class TicketListViewDesign
     {
-        public static ListView CreateStyledTicketListView<T>(ObservableCollection<T> tickets)
+        public static ListView CreateStyledTicketListView<T>(ObservableCollection<T> tickets, Style boxViewStyle)
         {
             var listView = new ListView
             {
@@ -16,8 +16,7 @@ namespace TicketerApp.ModelRenderers
                 {
                     var boxViewBackground = new BoxView
                     {
-                        BackgroundColor = Color.FromHex("#1E90FF"),
-                        CornerRadius = 50,
+                        Style = boxViewStyle,
                         Opacity = 0.5 // Уменьшаем немного прозрачность фона
                     };
 
@@ -69,9 +68,6 @@ namespace TicketerApp.ModelRenderers
 
                     return new ViewCell { View = absoluteLayout };
                 }),
-
-                SeparatorColor = Color.Gray,
-                BackgroundColor = Color.WhiteSmoke
             };
 
             return listView;

@@ -20,21 +20,12 @@ namespace TicketerApp
             InitializeComponent();
             ObservableCollection<Confirmation> requestsToConfirm = new ObservableCollection<Confirmation>();
             // some code to get all requests
-            brightThemeButton = FindByName("bright") as Button;
-            darkThemeButton = FindByName("dark") as Button;
-            brightThemeButton.Clicked += themeChange;
-            darkThemeButton.Clicked += themeChange;
 
-            StackLayout confirmationStackLayout = FindByName("ConfirmationGridList") as StackLayout;
-            ConfirmationRenderer confirmationRenderer = new ConfirmationRenderer(confirmationStackLayout, (Style)this.Resources["PlainTextStyle"]);
-            confirmationRenderer.Render();
-
-            StackLayout ticketsStackLayout = FindByName("TicketsGridList") as StackLayout;
-            TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"]);
-            ticketRenderer.Render();
+            ThemeButtonsInitialization();
+            StackLayoutRendererInitialization();
         }
 
-        void themeChange(object sender, EventArgs e)
+        void ThemeChange(object sender, EventArgs e)
         {
             if (sender == brightThemeButton)
             {
@@ -48,6 +39,30 @@ namespace TicketerApp
             {
                 App.Current.UserAppTheme = OSAppTheme.Unspecified;
             }
+        }
+
+        void ThemeButtonsInitialization()
+        {
+            brightThemeButton = FindByName("bright") as Button;
+            darkThemeButton = FindByName("dark") as Button;
+            brightThemeButton.Clicked += ThemeChange;
+            darkThemeButton.Clicked += ThemeChange;
+        }
+
+        void StackLayoutRendererInitialization()
+        {
+            StackLayout confirmationStackLayout = FindByName("ConfirmationGridList") as StackLayout;
+            ConfirmationRenderer confirmationRenderer = new ConfirmationRenderer(confirmationStackLayout, (Style)this.Resources["PlainTextStyle"]);
+            Style confirmationStyle = (Style)this.Resources["ListViewBackGroundStyle"];
+            Style boxViewConfirmationStyle = (Style)this.Resources["TicketBoxViewStyle"];
+            confirmationRenderer.Render(confirmationStyle, boxViewConfirmationStyle);
+
+
+            StackLayout ticketsStackLayout = FindByName("TicketsGridList") as StackLayout;
+            TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"]);
+            Style ticketsStyle = (Style)this.Resources["ListViewBackGroundStyle"];
+            Style boxViewTicketsStyle = (Style)this.Resources["TicketBoxViewStyle"];
+            ticketRenderer.Render(ticketsStyle, boxViewTicketsStyle);
         }
     }
 }

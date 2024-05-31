@@ -24,5 +24,20 @@
 
         <Color x:Key="ButtonsTextColorBright">Black</Color>
         <Color x:Key="ButtonsTextColorDark">#828a9a</Color>
+
+        <Color x:Key="listViewItemBackGroundColorDark">#252830</Color>
+        <Color x:Key="listViewItemBackGroundColorBright">#1E90FF</Color>
+
+        <Color x:Key="headerTextStyleDark">#eeba2c</Color>
+        <Color x:Key="headerTextStyleBright">#1E90FF</Color>
+
+        <Color x:Key="logOutButtonBackgroundDark">#eeba2c</Color>
+        <Color x:Key="logOutButtonBackgroundBright">#1E90FF</Color>
+
+        <Color x:Key="logOutButtonTextColorDark">Black</Color>
+        <Color x:Key="logOutButtonTextColorBright">White</Color>
+
+        <Color x:Key="ticketBoxViewBackgroundColorDark">#20232a</Color>
+        <Color x:Key="ticketBoxViewBackgroundColorBright">#1E90FF</Color>
     </Application.Resources>
 </Application>

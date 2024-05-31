@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace TicketerApp.ModelRenderers
 {
-    public static class ListViewDesign
+    public static class ConfirmationListViewDesign
     {
-        public static ListView CreateStyledListView<T>(ObservableCollection<T> items)
+        public static ListView CreateStyledListView<T>(ObservableCollection<T> items, Style boxViewStyle)
         {
             var listView = new ListView
             {
@@ -14,8 +14,7 @@ namespace TicketerApp.ModelRenderers
                 {
                     var boxViewBackground = new BoxView
                     {
-                        BackgroundColor = Color.FromHex("#1E90FF"),
-                        CornerRadius = 50,
+                        Style =boxViewStyle,
                         Opacity = 0.5 // Уменьшаем немного прозрачность фона
                     };
 
@@ -69,8 +68,6 @@ namespace TicketerApp.ModelRenderers
                     return new ViewCell { View = absoluteLayout };
                 }),
 
-                SeparatorColor = Color.Gray,
-                BackgroundColor = Color.WhiteSmoke
             };
 
             return listView;
