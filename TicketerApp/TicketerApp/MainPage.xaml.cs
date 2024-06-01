@@ -54,14 +54,14 @@ namespace TicketerApp
             Style boxViewBottomBorderStyle = (Style)this.Resources["BoxViewBottomBorder"];
 
             StackLayout confirmationStackLayout = FindByName("ConfirmationGridList") as StackLayout;
-            ConfirmationRenderer confirmationRenderer = new ConfirmationRenderer(confirmationStackLayout, (Style)this.Resources["PlainTextStyle"]);
+            ConfirmationRenderer confirmationRenderer = new ConfirmationRenderer(confirmationStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
             Style confirmationStyle = (Style)this.Resources["ListViewBackGroundStyle"];
             Style boxViewConfirmationStyle = (Style)this.Resources["TicketBoxViewStyle"];
             confirmationRenderer.Render(confirmationStyle, (boxViewBottomBorderStyle, boxViewConfirmationStyle));
 
 
             StackLayout ticketsStackLayout = FindByName("TicketsGridList") as StackLayout;
-            TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"]);
+            TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
             Style ticketsStyle = (Style)this.Resources["ListViewBackGroundStyle"];
             Style boxViewTicketsStyle = (Style)this.Resources["TicketBoxViewStyle"];
             

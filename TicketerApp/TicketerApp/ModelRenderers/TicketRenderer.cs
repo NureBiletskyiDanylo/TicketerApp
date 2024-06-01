@@ -9,14 +9,17 @@ namespace TicketerApp.ModelRenderers
 {
     public class TicketRenderer
     {
+        private readonly INavigation _navigation;
         private ObservableCollection<Ticket> _tickets = new ObservableCollection<Ticket>();
         private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
+        private ListView _listView;
 
-        public TicketRenderer(StackLayout layout, Style style)
+        public TicketRenderer(StackLayout layout, Style style, INavigation navigation)
         {
             _stackLayout = layout;
             _plainTextRenderer = new PlainTextRenderer("There are no tickets", style);
+            _navigation = navigation;
         }
 
         public void Render(Style listViewStyle, (Style, Style) boxViewStyles)
@@ -47,16 +50,27 @@ namespace TicketerApp.ModelRenderers
             _tickets.Add(ticket2);
             if (_tickets.Count > 0)
             {
-                ListView listView = TicketListViewDesign.CreateStyledTicketListView(_tickets, boxViewStyles);
-                listView.Style = listViewStyle;
+                _listView = TicketListViewDesign.CreateStyledTicketListView(_tickets, boxViewStyles);
+                _listView.Style = listViewStyle;
+                _listView.ItemSelected += selectedTicket;
                 _stackLayout.Children.Clear();
-                _stackLayout.Children.Add(listView);
+                _stackLayout.Children.Add(_listView);
             }
             else
             {
                 Label noTicketLabel = _plainTextRenderer.Label;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(noTicketLabel);
+            }
+        }
+        async void selectedTicket(Object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                Ticket ticket = (Ticket)((ListView)sender).SelectedItem;
+                await _navigation.PushAsync(new TicketDetailPage(ticket));
+
+                ((ListView)sender).SelectedItem = null;
             }
         }
     }

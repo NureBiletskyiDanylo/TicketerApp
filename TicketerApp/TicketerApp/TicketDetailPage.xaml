@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="TicketerApp.TicketDetailPage">
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="headerStyle">
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
+        </Style>
+        <Style TargetType="Label" x:Key="subHeaderStyle">
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+        </Style>
+        <Style TargetType="StackLayout" x:Key="stackLayoutStyle">
+            <Setter Property="Margin" Value="5, 5, 0, 0"></Setter>
+            <Setter Property="Orientation" Value="Horizontal"></Setter>
+        </Style>
+        <Style TargetType="Grid" x:Key="backgroundColor">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}"></Setter>
+        </Style>
+        <Style TargetType="Grid" x:Key="subGridBackgroundColor">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource subBackgroundColorDark}, Default={StaticResource subBackgroundColorBright}, Light={StaticResource subBackgroundColorBright}}"></Setter>
+        </Style>
+
+        <Style TargetType="Frame" x:Key="subFrameBackgroundColor">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource subBackgroundColorDark}, Default={StaticResource subBackgroundColorBright}, Light={StaticResource subBackgroundColorBright}}"></Setter>
+            <Setter Property="CornerRadius" Value="22"></Setter>
+            <Setter Property="Margin" Value="5,5,5,5"></Setter>
+        </Style>
+        
+        <Style TargetType="Label" x:Key="plainTextStyle">
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerAndPlainTextColorDark}, Default={StaticResource headerAndPlainTextColorBright}, Light={StaticResource headerAndPlainTextColorBright}}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+
+        <Style TargetType="Label" x:Key="dataTextStyle">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource dataTextColorDark}, Default={StaticResource dataTextColorBright}, Light={StaticResource dataTextColorBright}}"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Style="{StaticResource backgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
+                <Label Style="{StaticResource headerStyle}" Text="Ticket for:"/>
+                <Label Style="{StaticResource headerStyle}" Text="{Binding name}"/>
+            </StackLayout>
+            <Frame Grid.Row="1" Style="{StaticResource subFrameBackgroundColor}">
+                <Grid  Style="{StaticResource subGridBackgroundColor}" Padding="0, 0, 0, 20" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackLayout Margin="5, 20, 0, 0" Grid.Row="0">
+                        <Label Text="Ticket details" Style="{StaticResource subHeaderStyle}"></Label>
+                    </StackLayout>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="0" Style="{StaticResource stackLayoutStyle}">
+                            <Label Style="{StaticResource plainTextStyle}" Text="The event costs "></Label>
+                            <Label Text="{Binding price}" Style="{StaticResource dataTextStyle}"></Label>
+                            <Label Text="$" Style="{StaticResource dataTextStyle}"></Label>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Style="{StaticResource stackLayoutStyle}">
+                            <Label Style="{StaticResource plainTextStyle}" Text="It starts on "></Label>
+                            <Label Text="{Binding startTime}" Style="{StaticResource dataTextStyle}"></Label>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Style="{StaticResource stackLayoutStyle}">
+                            <Label Style="{StaticResource plainTextStyle}" Text="It ends on"></Label>
+                            <Label Text="{Binding endTime}" Style="{StaticResource dataTextStyle}"></Label>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </Frame>
+            <StackLayout Grid.Row="2" x:Name="qrcodeStackLayout">
+                <zxing:ZXingBarcodeImageView WidthRequest="200" HeightRequest="200" BarcodeValue="{Binding Id}" BarcodeFormat="QR_CODE"></zxing:ZXingBarcodeImageView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

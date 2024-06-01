@@ -10,14 +10,17 @@ namespace TicketerApp.ModelRenderers
 {
     public class ConfirmationRenderer
     {
+        private readonly INavigation _navigation;
         private ObservableCollection<Confirmation> _confirmations = new ObservableCollection<Confirmation>();
         private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
-        public ConfirmationRenderer(StackLayout layout, Style style)
+        private ListView _listView;
+        public ConfirmationRenderer(StackLayout layout, Style style, INavigation navigation)
         {
             _stackLayout = layout;
             _confirmations.Add(new Confirmation { PaymentId = 1, CorrectConfirmationAnswer = 123, EventTitle = "Event 1", PriceToPay = 49.99f, MfaRequired = true, MfaCode = "ABC123" });
             _plainTextRenderer = new PlainTextRenderer("There are no confirmation requests", style);
+            _navigation = navigation;
         }
 
         public void Render(Style listViewStyle, (Style, Style)boxViewStyles)
@@ -29,10 +32,11 @@ namespace TicketerApp.ModelRenderers
 
             if (_confirmations.Count > 0)
             {
-                ListView listView = ConfirmationListViewDesign.CreateStyledListView(_confirmations, boxViewStyles);
-                listView.Style = listViewStyle;
+                _listView = ConfirmationListViewDesign.CreateStyledListView(_confirmations, boxViewStyles);
+                _listView.Style = listViewStyle;
+                _listView.ItemSelected += selectedConfirmation;
                 _stackLayout.Children.Clear();
-                _stackLayout.Children.Add(listView);
+                _stackLayout.Children.Add(_listView);
             }
             else
             {
@@ -40,6 +44,18 @@ namespace TicketerApp.ModelRenderers
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(noConfirmLabel);
             }
+        }
+
+        async void selectedConfirmation(Object sender,  SelectedItemChangedEventArgs e)
+        {
+            if(e.SelectedItem !=  null)
+            {
+                Confirmation confirmation = (Confirmation)((ListView)sender).SelectedItem;
+                await _navigation.PushAsync(new ConfirmationDetailPage(confirmation));
+
+                ((ListView)sender).SelectedItem = null;
+            }
+
         }
     }
 }

@@ -42,5 +42,11 @@
 
         <Color x:Key="boxViewBottomBorderDark">#eeba2c</Color>
         <Color x:Key="boxViewBottomBorderBright">Black</Color>
+
+        <Color x:Key="subBackgroundColorDark">#252830</Color>
+        <Color x:Key="subBackgroundColorBright">#b7b7b7</Color>
+
+        <Color x:Key="dataTextColorDark">#2ceeba</Color>
+        <Color x:Key="dataTextColorBright">#ff1e90</Color>
     </Application.Resources>
 </Application>
