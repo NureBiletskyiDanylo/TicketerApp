@@ -13,7 +13,7 @@ namespace TicketerApp.ModelRenderers
         private ObservableCollection<Ticket> _tickets = new ObservableCollection<Ticket>();
         private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
-        private ListView _listView;
+        private CollectionView _collectionView;
 
         public TicketRenderer(StackLayout layout, Style style, INavigation navigation)
         {
@@ -22,7 +22,7 @@ namespace TicketerApp.ModelRenderers
             _navigation = navigation;
         }
 
-        public void Render(Style listViewStyle, (Style, Style) boxViewStyles)
+        public void Render(Style collectionViewStyle, (Style, Style) boxViewStyles)
         {
             if (_stackLayout == null)
             {
@@ -50,11 +50,11 @@ namespace TicketerApp.ModelRenderers
             _tickets.Add(ticket2);
             if (_tickets.Count > 0)
             {
-                _listView = TicketListViewDesign.CreateStyledTicketListView(_tickets, boxViewStyles);
-                _listView.Style = listViewStyle;
-                _listView.ItemSelected += selectedTicket;
+                _collectionView = TicketListViewDesign.CreateStyledTicketCollectionView(_tickets, boxViewStyles);
+                _collectionView.Style = collectionViewStyle;
+                _collectionView.SelectionChanged += selectedTicket;
                 _stackLayout.Children.Clear();
-                _stackLayout.Children.Add(_listView);
+                _stackLayout.Children.Add(_collectionView);
             }
             else
             {
@@ -63,14 +63,18 @@ namespace TicketerApp.ModelRenderers
                 _stackLayout.Children.Add(noTicketLabel);
             }
         }
-        async void selectedTicket(Object sender, SelectedItemChangedEventArgs e)
+        async void selectedTicket(Object sender, SelectionChangedEventArgs e)
         {
-            if (e.SelectedItem != null)
+            Ticket ticket = (Ticket)((CollectionView)sender).SelectedItem;
+            if (ticket != null)
             {
-                Ticket ticket = (Ticket)((ListView)sender).SelectedItem;
+
                 await _navigation.PushAsync(new TicketDetailPage(ticket));
 
-                ((ListView)sender).SelectedItem = null;
+                _collectionView.SelectionChanged -= selectedTicket;
+                ((CollectionView)sender).SelectedItem = null;
+                _collectionView.SelectionChanged += selectedTicket;
+
             }
         }
     }

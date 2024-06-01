@@ -31,7 +31,7 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ButtonsBackgroundDark}, Default={StaticResource ButtonsBackgroundBright},Light={StaticResource ButtonsBackgroundBright}}"></Setter>
                 <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource ButtonsTextColorDark}, Default={StaticResource ButtonsTextColorBright},Light={StaticResource ButtonsTextColorBright}}"></Setter>
             </Style>
-            <Style TargetType="ListView" x:Key="ListViewBackGroundStyle">
+            <Style TargetType="CollectionView" x:Key="ListViewBackGroundStyle">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Light={StaticResource backgroundTabViewBright}, Default={StaticResource backgroundTabViewDefault}}" />
             </Style>
             <Style TargetType="BoxView" x:Key="TicketBoxViewStyle">
@@ -68,7 +68,7 @@
                 </Style>
             </ResourceDictionary>
         </xct:TabView.Resources>
-        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Tickets">
+        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Tickets" >
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>

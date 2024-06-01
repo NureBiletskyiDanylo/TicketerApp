@@ -3,34 +3,35 @@ using Xamarin.Forms;
 
 namespace TicketerApp.ModelRenderers
 {
-    public static class ConfirmationListViewDesign
+    public static class ConfirmationCollectionViewDesign
     {
-        public static ListView CreateStyledListView<T>(ObservableCollection<T> items, (Style, Style) boxViewStyles)
+        public static CollectionView CreateStyledCollectionView<T>(ObservableCollection<T> items, (Style, Style) boxViewStyles)
         {
-            var listView = new ListView
+            var listView = new CollectionView
             {
+                SelectionMode = SelectionMode.Single,
                 ItemsSource = items,
                 ItemTemplate = new DataTemplate(() =>
                 {
                     var boxViewBackground = new BoxView
                     {
-                        Style =boxViewStyles.Item2,
-                        Opacity = 0.5 // Уменьшаем немного прозрачность фона
+                        Style = boxViewStyles.Item2,
+                        Opacity = 0.5 // Reduce the background opacity a bit
                     };
 
                     var grid = new Grid
                     {
                         ColumnDefinitions =
-                {
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-                },
+                        {
+                            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+                        },
                         RowDefinitions =
-                {
-                    new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto }
-                }
+                        {
+                            new RowDefinition { Height = GridLength.Auto },
+                            new RowDefinition { Height = GridLength.Auto }
+                        }
                     };
 
                     var eventTitleLabel = CreateLabel("Event Title:", 14, FontAttributes.Bold, TextAlignment.Center);
@@ -61,7 +62,8 @@ namespace TicketerApp.ModelRenderers
                         HeightRequest = 1,
                         Style = boxViewStyles.Item1,
                     };
-                    // Располагаем сетку и фоновый BoxView с абсолютным позиционированием
+
+                    // Position the grid and background BoxView with absolute positioning
                     AbsoluteLayout.SetLayoutFlags(bottomBorder, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
                     AbsoluteLayout.SetLayoutBounds(bottomBorder, new Rectangle(0, 1, 1, AbsoluteLayout.AutoSize));
                     AbsoluteLayout.SetLayoutFlags(grid, AbsoluteLayoutFlags.All);
@@ -72,9 +74,9 @@ namespace TicketerApp.ModelRenderers
                     absoluteLayout.Children.Add(boxViewBackground);
                     absoluteLayout.Children.Add(grid);
                     absoluteLayout.Children.Add(bottomBorder);
-                    return new ViewCell { View = absoluteLayout };
-                }),
 
+                    return new ContentView { Content = absoluteLayout };
+                })
             };
 
             return listView;

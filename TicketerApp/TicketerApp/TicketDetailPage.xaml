@@ -86,7 +86,11 @@
                 </Grid>
             </Frame>
             <StackLayout Grid.Row="2" x:Name="qrcodeStackLayout">
-                <zxing:ZXingBarcodeImageView WidthRequest="200" HeightRequest="200" BarcodeValue="{Binding Id}" BarcodeFormat="QR_CODE"></zxing:ZXingBarcodeImageView>
+                <zxing:ZXingBarcodeImageView WidthRequest="300" HeightRequest="300" BarcodeValue="{Binding Id}" BarcodeFormat="QR_CODE">
+                    <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                        <zxcm:EncodingOptions Height="300" Width="300"></zxcm:EncodingOptions>
+                    </zxing:ZXingBarcodeImageView.BarcodeOptions>
+                </zxing:ZXingBarcodeImageView>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

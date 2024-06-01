@@ -14,7 +14,7 @@ namespace TicketerApp.ModelRenderers
         private ObservableCollection<Confirmation> _confirmations = new ObservableCollection<Confirmation>();
         private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
-        private ListView _listView;
+        private CollectionView _collectionView;
         public ConfirmationRenderer(StackLayout layout, Style style, INavigation navigation)
         {
             _stackLayout = layout;
@@ -23,7 +23,7 @@ namespace TicketerApp.ModelRenderers
             _navigation = navigation;
         }
 
-        public void Render(Style listViewStyle, (Style, Style)boxViewStyles)
+        public void Render(Style collectionViewStyle, (Style, Style)boxViewStyles)
         {
             if (_stackLayout == null)
             {
@@ -32,11 +32,11 @@ namespace TicketerApp.ModelRenderers
 
             if (_confirmations.Count > 0)
             {
-                _listView = ConfirmationListViewDesign.CreateStyledListView(_confirmations, boxViewStyles);
-                _listView.Style = listViewStyle;
-                _listView.ItemSelected += selectedConfirmation;
+                _collectionView = ConfirmationCollectionViewDesign.CreateStyledCollectionView(_confirmations, boxViewStyles);
+                _collectionView.Style = collectionViewStyle;
+                _collectionView.SelectionChanged += selectedConfirmation;
                 _stackLayout.Children.Clear();
-                _stackLayout.Children.Add(_listView);
+                _stackLayout.Children.Add(_collectionView);
             }
             else
             {
@@ -46,14 +46,16 @@ namespace TicketerApp.ModelRenderers
             }
         }
 
-        async void selectedConfirmation(Object sender,  SelectedItemChangedEventArgs e)
+        async void selectedConfirmation(Object sender, SelectionChangedEventArgs e)
         {
-            if(e.SelectedItem !=  null)
+            Confirmation confirmation = (Confirmation)((CollectionView)sender).SelectedItem;
+            if (confirmation != null)
             {
-                Confirmation confirmation = (Confirmation)((ListView)sender).SelectedItem;
                 await _navigation.PushAsync(new ConfirmationDetailPage(confirmation));
 
-                ((ListView)sender).SelectedItem = null;
+                _collectionView.SelectionChanged -= selectedConfirmation;
+                ((CollectionView)sender).SelectedItem = null;
+                _collectionView.SelectionChanged += selectedConfirmation;
             }
 
         }
