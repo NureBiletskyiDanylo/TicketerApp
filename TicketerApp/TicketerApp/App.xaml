@@ -48,7 +48,7 @@
         <Color x:Key="subBackgroundColorBright">#b7b7b7</Color>
 
         <Color x:Key="dataTextColorDark">#2ceeba</Color>
-        <Color x:Key="dataTextColorBright">#ff8ec7</Color>
+        <Color x:Key="dataTextColorBright">deepskyblue</Color>
 
         <Color x:Key="infoTextColorBright">#ee9e9f</Color>
         <Color x:Key="infoTextColorDark">#00BABA</Color>
