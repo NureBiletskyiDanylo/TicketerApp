@@ -1,12 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TicketerApp.Register">
+             x:Class="TicketerApp.Register"
+             BackgroundColor="White">
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Text="BACK"
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        TextColor="#6495ED"
+                        HorizontalOptions="Start"
+                        Clicked="OnBackButtonClicked" />
+
+                <Button Text="LOG IN"
+                        Grid.Column="2"
+                        BackgroundColor="Transparent"
+                        TextColor="#6495ED"
+                        HorizontalOptions="End"
+                        Clicked="OnLoginButtonClicked" />
+            </Grid>
+
+            <Label Text="Register with Ticketer"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#6495ED"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,20,0,20" />
+
+            <BoxView HeightRequest="100" Color="Transparent" />
+
+            <Frame Padding="20"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   BackgroundColor="WhiteSmoke"
+                   Margin="20,20">
+
+                <StackLayout Spacing="15">
+                    <Entry x:Name="FullNameEntry"
+                           Placeholder="Full Name"
+                           TextColor="Black" />
+
+                    <Entry x:Name="EmailEntry"
+                           Placeholder="Email Address"
+                           Keyboard="Email"
+                           TextColor="Black" />
+
+                    <Grid>
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Password"
+                               IsPassword="True"
+                               TextColor="Black"
+                               HorizontalOptions="FillAndExpand" />
+
+                        <Button Text="SHOW"
+                                BackgroundColor="Transparent"
+                                TextColor="Gray"
+                                HorizontalOptions="End"
+                                Clicked="OnShowPasswordClicked" />
+                    </Grid>
+
+                    <Button Text="REGISTER"
+                            BackgroundColor="Gray"
+                            TextColor="White"
+                            Clicked="OnRegisterButtonClicked" />
+                </StackLayout>
+            </Frame>
+
+            <BoxView HeightRequest="100" Color="Transparent" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

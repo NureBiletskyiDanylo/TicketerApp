@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +10,37 @@ namespace TicketerApp
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void OnLoginButtonClicked(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void OnShowPasswordClicked(object sender, EventArgs e)
+        {
+            PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+        }
+
+        private void OnForgotPasswordClicked(object sender, EventArgs e)
+        {
+        }
+        private void OnBackButtonClicked(object sender, EventArgs e)
+        {
+        }
+        private void OnSignUpButtonClicked(object sender, EventArgs e)
+        {
+        }
+        private void OnGoogleLoginClicked(object sender, EventArgs e)
+        {
+        }
+
+        private void OnFacebookLoginClicked(object sender, EventArgs e)
+        {
+        }
+        private bool AuthenticateUser(string email, string password)
+        {
+            return email == "test@example.com" && password == "password";
         }
     }
 }
