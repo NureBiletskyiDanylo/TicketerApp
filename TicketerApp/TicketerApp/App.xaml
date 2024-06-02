@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TicketerApp.App">
+<Application
+    x:Class="TicketerApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <Style x:Key="header" TargetType="Label">
             <Setter Property="TextColor" Value="White" />
@@ -49,7 +50,7 @@
         <Color x:Key="dataTextColorDark">#2ceeba</Color>
         <Color x:Key="dataTextColorBright">#ff1e90</Color>
 
-        <Color x:Key="infoTextColorBright">#ff828b</Color>
+        <Color x:Key="infoTextColorBright">#ee9e9f</Color>
         <Color x:Key="infoTextColorDark">#00BABA</Color>
     </Application.Resources>
 </Application>

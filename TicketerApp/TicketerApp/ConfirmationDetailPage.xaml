@@ -1,86 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TicketerApp.ConfirmationDetailPage">
+<ContentPage
+    x:Class="TicketerApp.ConfirmationDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Resources>
-        <Style TargetType="Grid" x:Key="mainGridStyle">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}"></Setter>
+        <Style x:Key="mainGridStyle" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}" />
         </Style>
-        <Style TargetType="Label" x:Key="headerStyle">
-            <Setter Property="HorizontalOptions" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="25"></Setter>
-            <Setter Property="FontAttributes" Value="Bold"></Setter>
-            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
+        <Style x:Key="headerStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}" />
         </Style>
-        <Style TargetType="StackLayout" x:Key="headerStackLayout">
-            <Setter Property="Margin" Value="0, 10, 0, 10"></Setter>
-        </Style>
-
-        <Style TargetType="Label" x:Key="textStyle">
-            <Setter Property="FontSize" Value="18"></Setter>
-            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerAndPlainTextColorDark}, Default={StaticResource headerAndPlainTextColorBright}, Light={StaticResource headerAndPlainTextColorBright}}"></Setter>
+        <Style x:Key="headerStackLayout" TargetType="StackLayout">
+            <Setter Property="Margin" Value="0, 10, 0, 10" />
         </Style>
 
-        <Style TargetType="Grid" x:Key="subGridStyle">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource subBackgroundColorDark}, Default={StaticResource subBackgroundColorBright}, Light={StaticResource subBackgroundColorBright}}"></Setter>
-            <Setter Property="Margin" Value="30, 20, 40, 20"></Setter>
-            <Setter Property="Padding" Value="10, 20, 10, 20"></Setter>
+        <Style x:Key="textStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerAndPlainTextColorDark}, Default={StaticResource headerAndPlainTextColorBright}, Light={StaticResource headerAndPlainTextColorBright}}" />
         </Style>
 
-        <Style TargetType="StackLayout" x:Key="subStackLayout">
-            <Setter Property="Orientation" Value="Horizontal"></Setter>
-            <Setter Property="Margin" Value="20, 0, 0, 0"></Setter>
+        <Style x:Key="subGridStyle" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource subBackgroundColorDark}, Default={StaticResource subBackgroundColorBright}, Light={StaticResource subBackgroundColorBright}}" />
+            <Setter Property="Margin" Value="30, 20, 40, 20" />
+            <Setter Property="Padding" Value="10, 20, 10, 20" />
         </Style>
 
-        <Style TargetType="Label" x:Key="dataTextStyle">
-            <Setter Property="FontSize" Value="18"></Setter>
-            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource dataTextColorDark}, Default={StaticResource dataTextColorBright}, Light={StaticResource dataTextColorBright}}"></Setter>
+        <Style x:Key="subStackLayout" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Margin" Value="20, 0, 0, 0" />
         </Style>
 
-        <Style TargetType="Label" x:Key="warningTextStyle">
-            <Setter Property="FontSize" Value="18"></Setter>
-            <Setter Property="FontAttributes" Value="Bold"></Setter>
-            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource infoTextColorDark}, Default={StaticResource infoTextColorBright}, Light={StaticResource infoTextColorBright}}"></Setter>
+        <Style x:Key="dataTextStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource dataTextColorDark}, Default={StaticResource dataTextColorBright}, Light={StaticResource dataTextColorBright}}" />
+        </Style>
+
+        <Style x:Key="warningTextStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource infoTextColorDark}, Default={StaticResource infoTextColorBright}, Light={StaticResource infoTextColorBright}}" />
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid Style="{StaticResource mainGridStyle}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0" Style="{StaticResource headerStackLayout}">
-                <Label Style="{StaticResource headerStyle}" Text="Confirm the purchase please"></Label>
+                <Label Style="{StaticResource headerStyle}" Text="Confirm the purchase please" />
             </StackLayout>
-            <StackLayout Grid.Row="1" Orientation="Vertical" Margin="10, 0, 0, 0">
-                <Label Style="{StaticResource textStyle}" Text="Do you want to confirm the purchase of this ticket?"></Label>
+            <StackLayout
+                Grid.Row="1"
+                Margin="10,0,0,0"
+                Orientation="Vertical">
+                <Label Style="{StaticResource textStyle}" Text="Do you want to confirm the purchase of this ticket?" />
                 <Grid Style="{StaticResource subGridStyle}">
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Row="0" Style="{StaticResource subStackLayout}">
-                        <Label Text="Event title:" Style="{StaticResource textStyle}"></Label>
-                        <Label Text="{Binding EventTitle}" Style="{StaticResource dataTextStyle}"></Label>
+                        <Label Style="{StaticResource textStyle}" Text="Event title:" />
+                        <Label Style="{StaticResource dataTextStyle}" Text="{Binding EventTitle}" />
                     </StackLayout>
-                    <StackLayout Grid.Row="1" Style="{StaticResource subStackLayout}" >
-                        <Label Text="Ticket price:" Style="{StaticResource textStyle}"></Label>
-                        <Label Text="{Binding PriceToPay}" Style="{StaticResource dataTextStyle}"></Label>
-                        <Label Text="$" Style="{StaticResource dataTextStyle}"></Label>
+                    <StackLayout Grid.Row="1" Style="{StaticResource subStackLayout}">
+                        <Label Style="{StaticResource textStyle}" Text="Ticket price:" />
+                        <Label Style="{StaticResource dataTextStyle}" Text="{Binding PriceToPay}" />
+                        <Label Style="{StaticResource dataTextStyle}" Text="$" />
                     </StackLayout>
                 </Grid>
-                
-                <Label Style="{StaticResource textStyle}" Text="If yes, then please choose the number that you can see on your pc. If you want to cancel the purchase please press on:"></Label>
+
+                <Label Style="{StaticResource textStyle}" Text="If yes, then please choose the number that you can see on your pc. If you want to cancel the purchase please press on:" />
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="'I do not confirm'" Style="{StaticResource warningTextStyle}"></Label>
-                    <Label Style="{StaticResource textStyle}" Text="button."></Label>
+                    <Label Style="{StaticResource warningTextStyle}" Text="'I do not confirm'" />
+                    <Label Style="{StaticResource textStyle}" Text="button." />
                 </StackLayout>
             </StackLayout>
-            <StackLayout Grid.Row="2"></StackLayout>
+            <StackLayout Grid.Row="2" />
             <StackLayout Grid.Row="3">
-                <Button CornerRadius="20" Margin="20, 0, 20, 0" Text="I do not confirm" BackgroundColor="#ee9e9f" FontAttributes="Bold" ></Button>
+                <Button
+                    Margin="20,0,20,0"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource infoTextColorDark},
+                                                      Default={StaticResource infoTextColorBright},
+                                                      Light={StaticResource infoTextColorBright}}"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    Text="I do not confirm" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
