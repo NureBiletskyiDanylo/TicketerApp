@@ -5,7 +5,7 @@ using Xamarin.Forms;
 namespace TicketerApp.ModelRenderers
 {
 
-    public static class TicketListViewDesign
+    public static class TicketCollectionViewDesign
     {
         public static CollectionView CreateStyledTicketCollectionView<T>(ObservableCollection<T> tickets, (Style, Style) boxViewStyles)
         {

@@ -48,5 +48,8 @@
 
         <Color x:Key="dataTextColorDark">#2ceeba</Color>
         <Color x:Key="dataTextColorBright">#ff1e90</Color>
+
+        <Color x:Key="infoTextColorBright">#ff828b</Color>
+        <Color x:Key="infoTextColorDark">#00BABA</Color>
     </Application.Resources>
 </Application>

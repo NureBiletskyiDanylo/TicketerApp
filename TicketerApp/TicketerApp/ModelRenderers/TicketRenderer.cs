@@ -50,7 +50,7 @@ namespace TicketerApp.ModelRenderers
             _tickets.Add(ticket2);
             if (_tickets.Count > 0)
             {
-                _collectionView = TicketListViewDesign.CreateStyledTicketCollectionView(_tickets, boxViewStyles);
+                _collectionView = TicketCollectionViewDesign.CreateStyledTicketCollectionView(_tickets, boxViewStyles);
                 _collectionView.Style = collectionViewStyle;
                 _collectionView.SelectionChanged += selectedTicket;
                 _stackLayout.Children.Clear();

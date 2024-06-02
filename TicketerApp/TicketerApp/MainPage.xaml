@@ -31,7 +31,7 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ButtonsBackgroundDark}, Default={StaticResource ButtonsBackgroundBright},Light={StaticResource ButtonsBackgroundBright}}"></Setter>
                 <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource ButtonsTextColorDark}, Default={StaticResource ButtonsTextColorBright},Light={StaticResource ButtonsTextColorBright}}"></Setter>
             </Style>
-            <Style TargetType="CollectionView" x:Key="ListViewBackGroundStyle">
+            <Style TargetType="CollectionView" x:Key="CollectionViewBackGroundStyle">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Light={StaticResource backgroundTabViewBright}, Default={StaticResource backgroundTabViewDefault}}" />
             </Style>
             <Style TargetType="BoxView" x:Key="TicketBoxViewStyle">
