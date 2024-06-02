@@ -8,9 +8,9 @@
             <Setter Property="TextColor" Value="White" />
             <Setter Property="FontAttributes" Value="Bold" />
         </Style>
-        <Color x:Key="backgroundTabViewBright">#e5e5e5</Color>
+        <Color x:Key="backgroundTabViewBright">#fafafa</Color>
         <Color x:Key="backgroundTabViewDark">#2f333c</Color>
-        <Color x:Key="backgroundTabViewDefault">#e5e5e5</Color>
+        <Color x:Key="backgroundTabViewDefault">#fafafa</Color>
 
         <Color x:Key="backgroundTabViewItemBright">DeepSkyBlue</Color>
         <Color x:Key="backgroundTabViewItemDark">#24272e</Color>
@@ -45,12 +45,12 @@
         <Color x:Key="boxViewBottomBorderBright">Black</Color>
 
         <Color x:Key="subBackgroundColorDark">#252830</Color>
-        <Color x:Key="subBackgroundColorBright">#b7b7b7</Color>
+        <Color x:Key="subBackgroundColorBright">#bbddff</Color>
 
         <Color x:Key="dataTextColorDark">#2ceeba</Color>
-        <Color x:Key="dataTextColorBright">deepskyblue</Color>
+        <Color x:Key="dataTextColorBright">#1e20ff</Color>
 
-        <Color x:Key="infoTextColorBright">#ee9e9f</Color>
+        <Color x:Key="infoTextColorBright">#78bcff</Color>
         <Color x:Key="infoTextColorDark">#00BABA</Color>
     </Application.Resources>
 </Application>
