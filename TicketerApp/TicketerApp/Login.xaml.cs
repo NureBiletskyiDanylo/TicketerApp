@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
+using TicketerApp.Behaviors;
+using Xamarin.CommunityToolkit.Behaviors;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +26,10 @@ namespace TicketerApp
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)
         {
+            if (!Validate())
+            {
+                return;
+            }
             LoginRequestModel loginModel = new LoginRequestModel()
             {
                 email = _emailEntry.Text,
@@ -53,10 +60,16 @@ namespace TicketerApp
         {
         }
 
-
         private void SignUpClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage = new NavigationPage(new Register());
+        }
+
+        private bool Validate()
+        {
+            bool isEmailValid = _emailEntry.Behaviors.Any(b => b is EmailValidationBehavior && ((EmailValidationBehavior)b).IsValid);
+            bool isPasswordValid = _passwordEntry.Behaviors.Any(b => b is PasswordValidationBehavior && ((PasswordValidationBehavior)b).IsValid);
+            return isEmailValid && isPasswordValid;
         }
     }
 }

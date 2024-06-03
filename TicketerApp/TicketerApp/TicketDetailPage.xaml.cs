@@ -15,7 +15,6 @@ namespace TicketerApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TicketDetailPage : ContentPage
     {
-        Image qrCode;
         public TicketDetailPage(Ticket selectedTicket)
         {
             InitializeComponent();

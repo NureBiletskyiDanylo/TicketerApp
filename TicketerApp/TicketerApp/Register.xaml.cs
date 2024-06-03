@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
+using TicketerApp.Behaviors;
+using Xamarin.CommunityToolkit.Behaviors;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -44,6 +47,10 @@ namespace TicketerApp
 
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
+            if (!Validate())
+            {
+                return;
+            }
             RegisterRequestModel model = new RegisterRequestModel()
             {
                 first_name = _firstNameEntry.Text,
@@ -57,6 +64,15 @@ namespace TicketerApp
             {
                 Application.Current.MainPage = new NavigationPage(new MainPage(_requestManager._successfulResponseModel));
             }
+        }
+
+        private bool Validate()
+        {
+            bool isEmailValid = _emailEntry.Behaviors.Any(b => b is EmailValidationBehavior && ((EmailValidationBehavior)b).IsValid);
+            bool isPasswordValid = _passwordEntry.Behaviors.Any(b => b is PasswordValidationBehavior && ((PasswordValidationBehavior)b).IsValid);
+            bool isFirstNameValid = _firstNameEntry.Behaviors.Any(b => b is NameValidationBehavior && ((NameValidationBehavior)b).IsValid);
+            bool isLastNameValid = _lastNameEntry.Behaviors.Any(b => b is NameValidationBehavior && ((NameValidationBehavior)b).IsValid);
+            return isEmailValid && isPasswordValid && isFirstNameValid && isLastNameValid;
         }
     }
 }

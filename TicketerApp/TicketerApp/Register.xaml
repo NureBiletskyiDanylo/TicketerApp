@@ -1,11 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TicketerApp.Register"
-             BackgroundColor="White">
+<ContentPage
+    x:Class="TicketerApp.Register"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TicketerApp.Droid.Custom"
+    xmlns:localb="clr-namespace:TicketerApp.Behaviors"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="White">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="mainPageStyle" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}" />
+            </Style>
+
+            <Style x:Key="buttonTextStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="headerTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+
+            <Style x:Key="mainButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource loginRegisterButtonColorDark}, Default={StaticResource loginRegisterButtonColorBright}, Light={StaticResource loginRegisterButtonColorBright}}" />
+            </Style>
+
+            <Style x:Key="entryFieldAreaStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource entryFieldBackgroundDark}, Default={StaticResource entryFieldBackgroundBright}, Light={StaticResource entryFieldBackgroundBright}}" />
+                <Setter Property="Margin" Value="20" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="HasShadow" Value="True" />
+            </Style>
+
+            <Style x:Key="InvalidStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Red" />
+            </Style>
+            <Style x:Key="ValidStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource entryTextValidColorDark}, Default={StaticResource entryTextValidColorBright}, Light={StaticResource entryTextValidColorBright}}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Style="{StaticResource mainPageStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -13,65 +56,88 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="QUIT"
-                        Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        TextColor="#6495ED"
-                        HorizontalOptions="Start"
-                        Clicked="OnQuitButtonClicked" />
+                <Button
+                    Grid.Column="0"
+                    Clicked="OnQuitButtonClicked"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource buttonTextStyle}"
+                    Text="QUIT" />
 
-                <Button Text="LOG IN"
-                        Grid.Column="2"
-                        BackgroundColor="Transparent"
-                        TextColor="#6495ED"
-                        HorizontalOptions="End"
-                        Clicked="OnLoginButtonClicked" />
+                <Button
+                    Grid.Column="2"
+                    Clicked="OnLoginButtonClicked"
+                    HorizontalOptions="End"
+                    Style="{StaticResource buttonTextStyle}"
+                    Text="LOG IN" />
             </Grid>
 
-            <Label Text="Register with Ticketer"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   TextColor="#6495ED"
-                   HorizontalOptions="CenterAndExpand"
-                   Margin="0,20,0,20" />
+            <Label Style="{StaticResource headerTextStyle}" Text="Register with Ticketer" />
 
 
-            <Frame Padding="20"
-                   CornerRadius="10"
-                   HasShadow="True"
-                   BackgroundColor="WhiteSmoke"
-                   Margin="20,20">
+            <Frame Style="{StaticResource entryFieldAreaStyle}">
 
                 <StackLayout Spacing="15">
-                    <Entry x:Name="FirstNameEntry"
-                           Placeholder="First name"
-                           TextColor="Black" />
-                    <Entry x:Name="LastNameEntry"
-                           Placeholder="Last name"
-                           TextColor="Black" />
-                    <Entry x:Name="EmailEntry"
-                           Placeholder="Email Address"
-                           Keyboard="Email"
-                           TextColor="Black" />
-
+                    <local:CustomEntry
+                        x:Name="FirstNameEntry"
+                        Placeholder="First name"
+                        PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark},
+                                                           Default={StaticResource entryTextValidColorBright},
+                                                           Light={StaticResource entryTextValidColorBright}}">
+                        <local:CustomEntry.Behaviors>
+                            <localb:NameValidationBehavior InvalidStyle="{StaticResource InvalidStyle}" ValidStyle="{StaticResource ValidStyle}" />
+                        </local:CustomEntry.Behaviors>
+                    </local:CustomEntry>
+                    <local:CustomEntry
+                        x:Name="LastNameEntry"
+                        Placeholder="Last name"
+                        PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark},
+                                                           Default={StaticResource entryTextValidColorBright},
+                                                           Light={StaticResource entryTextValidColorBright}}">
+                        <local:CustomEntry.Behaviors>
+                            <localb:NameValidationBehavior InvalidStyle="{StaticResource InvalidStyle}" ValidStyle="{StaticResource ValidStyle}" />
+                        </local:CustomEntry.Behaviors>
+                    </local:CustomEntry>
+                    <local:CustomEntry
+                        x:Name="EmailEntry"
+                        Keyboard="Email"
+                        Placeholder="Email Address"
+                        PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark},
+                                                           Default={StaticResource entryTextValidColorBright},
+                                                           Light={StaticResource entryTextValidColorBright}}">
+                        <local:CustomEntry.Behaviors>
+                            <xct:EmailValidationBehavior
+                                DecorationFlags="Trim"
+                                InvalidStyle="{StaticResource InvalidStyle}"
+                                ValidStyle="{StaticResource ValidStyle}" />
+                        </local:CustomEntry.Behaviors>
+                    </local:CustomEntry>
                     <Grid>
-                        <Entry x:Name="PasswordEntry"
-                               Placeholder="Password"
-                               IsPassword="True"
-                               TextColor="Black"
-                               HorizontalOptions="FillAndExpand" />
+                        <local:CustomEntry
+                            x:Name="PasswordEntry"
+                            HorizontalOptions="FillAndExpand"
+                            IsPassword="True"
+                            Placeholder="Password"
+                            PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark},
+                                                               Default={StaticResource entryTextValidColorBright},
+                                                               Light={StaticResource entryTextValidColorBright}}">
+                            <Entry.Behaviors>
+                                <localb:PasswordValidationBehavior InvalidStyle="{StaticResource InvalidStyle}" ValidStyle="{StaticResource ValidStyle}" />
+                            </Entry.Behaviors>
+                        </local:CustomEntry>
 
-                        <Button Text="SHOW"
-                                BackgroundColor="Transparent"
-                                TextColor="Gray"
-                                HorizontalOptions="End"
-                                Clicked="OnShowPasswordClicked" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            Clicked="OnShowPasswordClicked"
+                            HorizontalOptions="End"
+                            Text="SHOW"
+                            TextColor="Gray" />
                     </Grid>
 
-                    <Button Text="REGISTER"
-                            BackgroundColor="Gray"
-                            TextColor="White"
-                            Clicked="OnRegisterButtonClicked" />
+                    <Button
+                        Clicked="OnRegisterButtonClicked"
+                        Style="{StaticResource mainButtonStyle}"
+                        Text="REGISTER"
+                        TextColor="Black" />
                 </StackLayout>
             </Frame>
         </StackLayout>

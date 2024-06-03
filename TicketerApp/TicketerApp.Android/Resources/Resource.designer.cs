@@ -21988,10 +21988,10 @@ namespace TicketerApp.Droid
 			public const int design_snackbar_background = 2131165284;
 			
 			// aapt resource value: 0x7F070065
-			public const int google = 2131165285;
+			public const int google1 = 2131165285;
 			
 			// aapt resource value: 0x7F070066
-			public const int google1 = 2131165286;
+			public const int google_icon = 2131165286;
 			
 			// aapt resource value: 0x7F070067
 			public const int ic_arrow_down_24dp = 2131165287;

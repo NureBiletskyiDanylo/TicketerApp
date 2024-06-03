@@ -3,39 +3,50 @@
     x:Class="TicketerApp.Login"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TicketerApp.Droid.Custom"
+    xmlns:localb="clr-namespace:TicketerApp.Behaviors"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="White">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="mainPageStyle" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}"></Setter>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}" />
             </Style>
 
             <Style x:Key="buttonTextStyle" TargetType="Button">
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
-                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
 
             <Style x:Key="headerTextStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
-                <Setter Property="Margin" Value="0,20,0,10"></Setter>
-                <Setter Property="FontAttributes" Value="Bold"></Setter>
-                <Setter Property="FontSize" Value="24"></Setter>
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
             </Style>
 
             <Style x:Key="entryFieldAreaStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource entryFieldBackgroundDark}, Default={StaticResource entryFieldBackgroundBright}, Light={StaticResource entryFieldBackgroundBright}}"></Setter>
-                <Setter Property="Margin" Value="20"></Setter>
-                <Setter Property="Padding" Value="20"></Setter>
-                <Setter Property="CornerRadius" Value="10"></Setter>
-                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource entryFieldBackgroundDark}, Default={StaticResource entryFieldBackgroundBright}, Light={StaticResource entryFieldBackgroundBright}}" />
+                <Setter Property="Margin" Value="20" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="HasShadow" Value="True" />
+            </Style>
+
+            <Style x:Key="mainButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource loginRegisterButtonColorDark}, Default={StaticResource loginRegisterButtonColorBright}, Light={StaticResource loginRegisterButtonColorBright}}" />
+            </Style>
+
+
+            <Style x:Key="oauthButtonStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource loginRegisterButtonColorDark}, Default={StaticResource loginRegisterButtonColorBright}, Light={StaticResource loginRegisterButtonColorBright}}" />
             </Style>
             <Style x:Key="InvalidStyle" TargetType="Entry">
-                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="TextColor" Value="Red" />
             </Style>
             <Style x:Key="ValidStyle" TargetType="Entry">
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource entryTextValidColorDark}, Default={StaticResource entryTextValidColorBright}, Light={StaticResource entryTextValidColorBright}}"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource entryTextValidColorDark}, Default={StaticResource entryTextValidColorBright}, Light={StaticResource entryTextValidColorBright}}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -56,41 +67,50 @@
                     Grid.Column="0"
                     Clicked="OnQuitButtonClicked"
                     HorizontalOptions="Start"
-                    Text="QUIT"
-                    Style="{StaticResource buttonTextStyle}"/>
+                    Style="{StaticResource buttonTextStyle}"
+                    Text="QUIT" />
                 <Button
                     x:Name="signUpButton"
                     Grid.Column="2"
                     Clicked="SignUpClicked"
                     HorizontalOptions="End"
-                    Text="SIGN UP"
-                    Style="{StaticResource buttonTextStyle}" />
+                    Style="{StaticResource buttonTextStyle}"
+                    Text="SIGN UP" />
 
             </Grid>
             <Label
                 Grid.Row="1"
                 Style="{StaticResource headerTextStyle}"
                 Text="Log In to Ticketer" />
-            <Frame
-                Grid.Row="2"
-                Style="{StaticResource entryFieldAreaStyle}">
+            <Frame Grid.Row="2" Style="{StaticResource entryFieldAreaStyle}">
                 <StackLayout Spacing="15">
-                    <Entry
+                    <local:CustomEntry
                         x:Name="EmailEntry"
                         Keyboard="Email"
                         Placeholder="Email Address"
-                        PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark}, Default={StaticResource entryTextValidColorBright}, Light={StaticResource entryTextValidColorBright}}">
-                        <Entry.Behaviors>
-                            <xct:EmailValidationBehavior  DecorationFlags="Trim" InvalidStyle="{StaticResource InvalidStyle}" ValidStyle="{StaticResource ValidStyle}"/>
-                        </Entry.Behaviors>
-                    </Entry>
+                        PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark},
+                                                           Default={StaticResource entryTextValidColorBright},
+                                                           Light={StaticResource entryTextValidColorBright}}">
+                        <local:CustomEntry.Behaviors>
+                            <xct:EmailValidationBehavior
+                                DecorationFlags="Trim"
+                                InvalidStyle="{StaticResource InvalidStyle}"
+                                ValidStyle="{StaticResource ValidStyle}" />
+                        </local:CustomEntry.Behaviors>
+                    </local:CustomEntry>
                     <Grid>
-                        <Entry
+                        <local:CustomEntry
                             x:Name="PasswordEntry"
                             HorizontalOptions="FillAndExpand"
                             IsPassword="True"
                             Placeholder="Password"
-                            TextColor="Black" />
+                            PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark},
+                                                               Default={StaticResource entryTextValidColorBright},
+                                                               Light={StaticResource entryTextValidColorBright}}">
+                            <Entry.Behaviors>
+                                <localb:PasswordValidationBehavior InvalidStyle="{StaticResource InvalidStyle}" ValidStyle="{StaticResource ValidStyle}" />
+                            </Entry.Behaviors>
+                        </local:CustomEntry>
                         <Button
                             BackgroundColor="Transparent"
                             Clicked="OnShowPasswordClicked"
@@ -99,10 +119,10 @@
                             TextColor="Gray" />
                     </Grid>
                     <Button
-                        BackgroundColor="Gray"
                         Clicked="OnLoginButtonClicked"
+                        Style="{StaticResource mainButtonStyle}"
                         Text="LOG IN"
-                        TextColor="White" />
+                        TextColor="Black" />
                     <Label
                         HorizontalOptions="Center"
                         Text="FORGOT PASSWORD?"
@@ -114,9 +134,9 @@
                     </Label>
 
                     <Frame
-                        BackgroundColor="WhiteSmoke"
                         CornerRadius="5"
                         HeightRequest="20"
+                        Style="{StaticResource oauthButtonStyle}"
                         VerticalOptions="Center">
                         <Grid VerticalOptions="Center">
                             <Grid.ColumnDefinitions>
@@ -125,16 +145,15 @@
                             </Grid.ColumnDefinitions>
 
                             <Image
-                                BackgroundColor="Transparent"
-                                HeightRequest="24"
-                                Source="google.jpg"
+                                HeightRequest="48"
+                                Source="google_icon.png"
                                 VerticalOptions="Center"
-                                WidthRequest="24" />
+                                WidthRequest="48" />
                             <Label
                                 Grid.Column="1"
                                 Margin="10,0,0,0"
                                 Text="Sign in with Google"
-                                TextColor="Gray"
+                                TextColor="Black"
                                 VerticalOptions="Center" />
                         </Grid>
                         <Frame.GestureRecognizers>

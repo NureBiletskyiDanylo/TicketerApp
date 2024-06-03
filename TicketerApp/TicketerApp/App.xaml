@@ -58,5 +58,9 @@
 
         <Color x:Key="entryTextValidColorDark">#eeba2c</Color>
         <Color x:Key="entryTextValidColorBright">Black</Color>
+
+        <Color x:Key="loginRegisterButtonColorDark">#2ceeba</Color>
+        <Color x:Key="loginRegisterButtonColorBright">DarkGray</Color>
+
     </Application.Resources>
 </Application>
