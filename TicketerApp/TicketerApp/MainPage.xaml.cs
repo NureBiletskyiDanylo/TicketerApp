@@ -33,14 +33,17 @@ namespace TicketerApp
             if (sender == brightThemeButton)
             {
                 App.Current.UserAppTheme = OSAppTheme.Light;
+                Preferences.Set("theme", "bright");
             }
             else if (sender == darkThemeButton)
             {
                 App.Current.UserAppTheme = OSAppTheme.Dark;
+                Preferences.Set("theme", "dark");
             }
             else
             {
                 App.Current.UserAppTheme = OSAppTheme.Unspecified;
+                Preferences.Set("theme", "bright");
             }
         }
 

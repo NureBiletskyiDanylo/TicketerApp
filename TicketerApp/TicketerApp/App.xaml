@@ -30,7 +30,7 @@
         <Color x:Key="listViewItemBackGroundColorBright">#1E90FF</Color>
 
         <Color x:Key="headerTextStyleDark">#eeba2c</Color>
-        <Color x:Key="headerTextStyleBright">#1E90FF</Color>
+        <Color x:Key="headerTextStyleBright">#6495ED</Color>
 
         <Color x:Key="logOutButtonBackgroundDark">#eeba2c</Color>
         <Color x:Key="logOutButtonBackgroundBright">#1E90FF</Color>
@@ -52,5 +52,11 @@
 
         <Color x:Key="infoTextColorBright">#78bcff</Color>
         <Color x:Key="infoTextColorDark">#00BABA</Color>
+
+        <Color x:Key="entryFieldBackgroundDark">#252830</Color>
+        <Color x:Key="entryFieldBackgroundBright">whitesmoke</Color>
+
+        <Color x:Key="entryTextValidColorDark">#eeba2c</Color>
+        <Color x:Key="entryTextValidColorBright">Black</Color>
     </Application.Resources>
 </Application>

@@ -11,10 +11,23 @@ namespace TicketerApp
         public App()
         {
             InitializeComponent();
-            
         }
 
         protected override void OnStart()
+        {
+            SetTheme();
+            LoggedInCheck();
+        }
+
+        protected override void OnSleep()
+        {
+        }
+
+        protected override void OnResume()
+        {
+        }
+
+        private void LoggedInCheck()
         {
             bool isLoggedIn;
             if (!Preferences.ContainsKey("logged_in"))
@@ -38,13 +51,22 @@ namespace TicketerApp
                 MainPage = new NavigationPage(new Login());
             }
         }
-
-        protected override void OnSleep()
+        
+        private void SetTheme()
         {
-        }
-
-        protected override void OnResume()
-        {
+            string themeName = Preferences.Get("theme", "bright");
+            switch (themeName)
+            {
+                case "bright":
+                    Application.Current.UserAppTheme = OSAppTheme.Light; 
+                    break;
+                case "dark":
+                    Application.Current.UserAppTheme = OSAppTheme.Dark;
+                    break;
+                default:
+                    Application.Current.UserAppTheme = OSAppTheme.Unspecified;
+                    break;
+            }
         }
     }
 }

@@ -1,11 +1,150 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TicketerApp.Login"
-             BackgroundColor="White">
+<ContentPage
+    x:Class="TicketerApp.Login"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="mainPageStyle" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Default={StaticResource backgroundTabViewBright}, Light={StaticResource backgroundTabViewBright}}"></Setter>
+            </Style>
 
+            <Style x:Key="buttonTextStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            </Style>
+
+            <Style x:Key="headerTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Default={StaticResource headerTextStyleBright}, Light={StaticResource headerTextStyleBright}}"></Setter>
+                <Setter Property="Margin" Value="0,20,0,10"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontSize" Value="24"></Setter>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+            </Style>
+
+            <Style x:Key="entryFieldAreaStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource entryFieldBackgroundDark}, Default={StaticResource entryFieldBackgroundBright}, Light={StaticResource entryFieldBackgroundBright}}"></Setter>
+                <Setter Property="Margin" Value="20"></Setter>
+                <Setter Property="Padding" Value="20"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+            </Style>
+            <Style x:Key="InvalidStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Red"></Setter>
+            </Style>
+            <Style x:Key="ValidStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource entryTextValidColorDark}, Default={StaticResource entryTextValidColorBright}, Light={StaticResource entryTextValidColorBright}}"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid>
+        <Grid Style="{StaticResource mainPageStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Clicked="OnQuitButtonClicked"
+                    HorizontalOptions="Start"
+                    Text="QUIT"
+                    Style="{StaticResource buttonTextStyle}"/>
+                <Button
+                    x:Name="signUpButton"
+                    Grid.Column="2"
+                    Clicked="SignUpClicked"
+                    HorizontalOptions="End"
+                    Text="SIGN UP"
+                    Style="{StaticResource buttonTextStyle}" />
+
+            </Grid>
+            <Label
+                Grid.Row="1"
+                Style="{StaticResource headerTextStyle}"
+                Text="Log In to Ticketer" />
+            <Frame
+                Grid.Row="2"
+                Style="{StaticResource entryFieldAreaStyle}">
+                <StackLayout Spacing="15">
+                    <Entry
+                        x:Name="EmailEntry"
+                        Keyboard="Email"
+                        Placeholder="Email Address"
+                        PlaceholderColor="{AppThemeBinding Dark={StaticResource entryTextValidColorDark}, Default={StaticResource entryTextValidColorBright}, Light={StaticResource entryTextValidColorBright}}">
+                        <Entry.Behaviors>
+                            <xct:EmailValidationBehavior  DecorationFlags="Trim" InvalidStyle="{StaticResource InvalidStyle}" ValidStyle="{StaticResource ValidStyle}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Grid>
+                        <Entry
+                            x:Name="PasswordEntry"
+                            HorizontalOptions="FillAndExpand"
+                            IsPassword="True"
+                            Placeholder="Password"
+                            TextColor="Black" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            Clicked="OnShowPasswordClicked"
+                            HorizontalOptions="End"
+                            Text="SHOW"
+                            TextColor="Gray" />
+                    </Grid>
+                    <Button
+                        BackgroundColor="Gray"
+                        Clicked="OnLoginButtonClicked"
+                        Text="LOG IN"
+                        TextColor="White" />
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="FORGOT PASSWORD?"
+                        TextColor="Gray"
+                        VerticalOptions="End">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnForgotPasswordClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Frame
+                        BackgroundColor="WhiteSmoke"
+                        CornerRadius="5"
+                        HeightRequest="20"
+                        VerticalOptions="Center">
+                        <Grid VerticalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                BackgroundColor="Transparent"
+                                HeightRequest="24"
+                                Source="google.jpg"
+                                VerticalOptions="Center"
+                                WidthRequest="24" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                Text="Sign in with Google"
+                                TextColor="Gray"
+                                VerticalOptions="Center" />
+                        </Grid>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnGoogleLoginClicked" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+        </Grid>
+        <!--<Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -17,7 +156,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-
+                <StackLayout Grid.Column="0">
+                    <Button  Text="sign up" TextTransform="Uppercase" Clicked="SignUpClicked" x:Name="signUpButton"></Button>
+                </StackLayout>
                 <Button Text="BACK"
                         Grid.Column="0"
                         BackgroundColor="Transparent"
@@ -27,10 +168,9 @@
 
                 <Button Text="SIGN UP"
                         Grid.Column="2"
-                        BackgroundColor="Transparent"
                         TextColor="#6495ED"
                         HorizontalOptions="End"
-                        Clicked="OnSignUpButtonClicked" />
+                        Clicked="SignUpClicked" ></Button>
             </Grid>
 
             <Label Text="Log In to Ticketer"
@@ -73,7 +213,7 @@
                             BackgroundColor="Gray"
                             TextColor="White"
                             Clicked="OnLoginButtonClicked" />
-
+                    <Button Text="b"> </Button>
                     <Label Text="FORGOT PASSWORD?"
                            TextColor="Gray"
                            HorizontalOptions="Center"
@@ -103,7 +243,7 @@
                 </StackLayout>
             </Frame>
 
-            <BoxView HeightRequest="100" Color="Transparent" />
-        </Grid>
+            <BoxView HeightRequest="100" Color="Transparent" />-->
+        <!--</Grid>-->
     </ContentPage.Content>
 </ContentPage>

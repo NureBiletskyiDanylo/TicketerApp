@@ -32,16 +32,16 @@ namespace TicketerApp.APIConnector
             }
         }
 
-        public async void RegisterSimpleRequest(RegisterRequestModel registerModel)
+        public async Task RegisterSimpleRequest(RegisterRequestModel registerModel)
         {
             string jsonData = JsonConvert.SerializeObject(registerModel);
 
             var content = new StringContent(jsonData, Encoding.UTF8 , "application/json");
-            HttpResponseMessage response = await _httpclient.PutAsync("/api/auth/register", content);
+            HttpResponseMessage response = await _httpclient.PostAsync("/api/auth/register", content);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string result = await response.Content.ReadAsStringAsync();
-                _successfulResponseModel = JsonConvert.DeserializeObject(result) as SuccessfulLoginRegistrationResponseModel;
+                _successfulResponseModel = JsonConvert.DeserializeObject<SuccessfulLoginRegistrationResponseModel>(result);
                 SaveData();
             }
         }

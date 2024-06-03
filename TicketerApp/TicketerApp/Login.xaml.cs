@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
 using Xamarin.Forms;
@@ -44,19 +45,18 @@ namespace TicketerApp
         private void OnForgotPasswordClicked(object sender, EventArgs e)
         {
         }
-        private void OnBackButtonClicked(object sender, EventArgs e)
+        private void OnQuitButtonClicked(object sender, EventArgs e)
         {
-        }
-        private void OnSignUpButtonClicked(object sender, EventArgs e)
-        {
+            Process.GetCurrentProcess().Kill();
         }
         private void OnGoogleLoginClicked(object sender, EventArgs e)
         {
         }
 
-        private bool AuthenticateUser(string email, string password)
+
+        private void SignUpClicked(object sender, EventArgs e)
         {
-            return email == "test@example.com" && password == "password";
+            Application.Current.MainPage = new NavigationPage(new Register());
         }
     }
 }
