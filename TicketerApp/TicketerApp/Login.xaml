@@ -5,8 +5,13 @@
              BackgroundColor="White">
 
     <ContentPage.Content>
-        <StackLayout>
-            <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -33,15 +38,16 @@
                    FontAttributes="Bold"
                    TextColor="#6495ED"
                    HorizontalOptions="CenterAndExpand"
-                   Margin="0,20,0,20" />
+                   Margin="0,20,0,10"
+                   Grid.Row="1"/>
 
-            <BoxView HeightRequest="100" Color="Transparent" />
 
             <Frame Padding="20"
                    CornerRadius="10"
                    HasShadow="True"
                    BackgroundColor="WhiteSmoke"
-                   Margin="20,20">
+                   Margin="20,20"
+                   Grid.Row="2">
 
                 <StackLayout Spacing="15">
                     <Entry x:Name="EmailEntry"
@@ -98,6 +104,6 @@
             </Frame>
 
             <BoxView HeightRequest="100" Color="Transparent" />
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

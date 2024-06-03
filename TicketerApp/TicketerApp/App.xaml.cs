@@ -1,7 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using Xamarin.Essentials;
+using TicketerApp.APIConnector.RequestModels;
+using TicketerApp.Utils;
 namespace TicketerApp
 {
     public partial class App : Application
@@ -9,13 +11,32 @@ namespace TicketerApp
         public App()
         {
             InitializeComponent();
-
             
-            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
         {
+            bool isLoggedIn;
+            if (!Preferences.ContainsKey("logged_in"))
+            {
+                isLoggedIn = false;
+                Preferences.Set("logged_in", false);
+            }
+            else
+            {
+                isLoggedIn = Preferences.Get("logged_in", false);
+            }
+            if (isLoggedIn)
+            {
+                double currentTimeStamp = UnixStampToDateTimeConverter.GetCurrentUnixTimeStamp();
+                double expires_at = Preferences.Get("expires_at", currentTimeStamp);
+                SuccessfulLoginRegistrationResponseModel model = new SuccessfulLoginRegistrationResponseModel() { token = Preferences.Get("token", null), expires_at = expires_at };
+                MainPage = new NavigationPage(new MainPage(model));
+            }
+            else
+            {
+                MainPage = new NavigationPage(new Login());
+            }
         }
 
         protected override void OnSleep()

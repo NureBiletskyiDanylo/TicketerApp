@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.ModelRenderers;
 using TicketerApp.Models;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace TicketerApp
@@ -15,12 +17,13 @@ namespace TicketerApp
     {
         private Button brightThemeButton;
         private Button darkThemeButton;
-        public MainPage()
+        private SuccessfulLoginRegistrationResponseModel _model;
+        public MainPage(SuccessfulLoginRegistrationResponseModel model)
         {
             InitializeComponent();
             ObservableCollection<Confirmation> requestsToConfirm = new ObservableCollection<Confirmation>();
             // some code to get all requests
-
+            _model = model;
             ThemeButtonsInitialization();
             StackLayoutRendererInitialization();
         }
@@ -66,6 +69,14 @@ namespace TicketerApp
             Style boxViewTicketsStyle = (Style)this.Resources["TicketBoxViewStyle"];
             
             ticketRenderer.Render(ticketsStyle, (boxViewBottomBorderStyle, boxViewTicketsStyle));
+        }
+
+        private void logOutClickedEventHandler(object sender, EventArgs e)
+        {
+            Preferences.Set("logged_in", false);
+            Preferences.Remove("token");
+            Preferences.Remove("expires_at");
+            Application.Current.MainPage = new NavigationPage(new Login());
         }
     }
 }

@@ -71,11 +71,7 @@ namespace TicketerApp.ModelRenderers
                     AbsoluteLayout.SetLayoutFlags(boxViewBackground, AbsoluteLayoutFlags.All);
                     AbsoluteLayout.SetLayoutBounds(boxViewBackground, new Rectangle(0, 0, 1, 1));
                     // Create a bottom border
-                    var bottomBorder = new BoxView
-                    {
-                        HeightRequest = 1,
-                        BackgroundColor = Color.Black
-                    };
+
                     AbsoluteLayout.SetLayoutFlags(bottomBorder, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
                     AbsoluteLayout.SetLayoutBounds(bottomBorder, new Rectangle(0, 1, 1, AbsoluteLayout.AutoSize));
 
