@@ -6,6 +6,7 @@ using TicketerApp.APIConnector.RequestModels;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 namespace TicketerApp.APIConnector
 {
     public class RequestManager
@@ -29,6 +30,11 @@ namespace TicketerApp.APIConnector
                 string result = await response.Content.ReadAsStringAsync();
                 _successfulResponseModel = JsonConvert.DeserializeObject<SuccessfulLoginRegistrationResponseModel>(result);
                 SaveData();
+            }
+            else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                await Application.Current.MainPage.DisplayAlert("Log in operation failed", "Credentials are probably wrong. Check your password and email", "Ok");
+                return;
             }
         }
 

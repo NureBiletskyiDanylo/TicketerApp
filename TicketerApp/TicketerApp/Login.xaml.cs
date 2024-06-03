@@ -22,6 +22,7 @@ namespace TicketerApp
             _manager = new RequestManager();
             _emailEntry = (Entry)FindByName("EmailEntry");
             _passwordEntry = (Entry)FindByName("PasswordEntry");
+
         }
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)
@@ -71,5 +72,6 @@ namespace TicketerApp
             bool isPasswordValid = _passwordEntry.Behaviors.Any(b => b is PasswordValidationBehavior && ((PasswordValidationBehavior)b).IsValid);
             return isEmailValid && isPasswordValid;
         }
+
     }
 }
