@@ -22,32 +22,14 @@ namespace TicketerApp.ModelRenderers
             _navigation = navigation;
         }
 
-        public void Render(Style collectionViewStyle, (Style, Style) boxViewStyles)
+        public void Render(Style collectionViewStyle, (Style, Style) boxViewStyles, ObservableCollection<Ticket> tickets)
         {
             if (_stackLayout == null)
             {
                 throw new ArgumentNullException(nameof(_stackLayout));
             }
             // Создаем один билет
-            Ticket ticket = new Ticket
-            {
-                startTime = new DateTime(2024, 5, 10, 14, 30, 0),
-                endTime = new DateTime(2024, 5, 10, 16, 30, 0),
-                name = "Sample Event",
-                price = 50.0f
-            };
-
-            Ticket ticket2 = new Ticket
-            {
-                startTime = new DateTime(2024, 5, 10, 14, 30, 0),
-                endTime = new DateTime(2024, 5, 10, 16, 30, 0),
-                name = "Sample Event",
-                price = 50.0f
-            };
-
-            // Добавляем билет в коллекцию
-            _tickets.Add(ticket);
-            _tickets.Add(ticket2);
+            _tickets = tickets;
             if (_tickets.Count > 0)
             {
                 _collectionView = TicketCollectionViewDesign.CreateStyledTicketCollectionView(_tickets, boxViewStyles);

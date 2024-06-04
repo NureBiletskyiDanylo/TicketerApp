@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketerApp.Android", "TicketerApp\TicketerApp.Android\TicketerApp.Android.csproj", "{DA0A5BB7-247B-4238-8B50-EF9E2AE6AE1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketerApp", "TicketerApp\TicketerApp\TicketerApp.csproj", "{321301AE-01E6-47C4-814B-DB1255175E2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketerApp", "TicketerApp\TicketerApp\TicketerApp.csproj", "{321301AE-01E6-47C4-814B-DB1255175E2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

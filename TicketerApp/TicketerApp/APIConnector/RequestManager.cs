@@ -7,56 +7,41 @@ using Newtonsoft.Json;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using TicketerApp.Models;
+using TicketerApp.APIConnector.RequestType;
+using System.IO;
+using TicketerApp.APIConnector.Converters;
+using System.Linq;
 namespace TicketerApp.APIConnector
 {
     public class RequestManager
     {
-        HttpClient _httpclient;
+        readonly Uri baseAddress = new Uri("https://ticketer.ruslan.page/");
+        LoginRequest loginRequest;
+        RegisterRequest registerRequest;
+        GetTicketsRequest getTicketsRequest;
         public SuccessfulLoginRegistrationResponseModel _successfulResponseModel;
         public RequestManager()
         {
-            _httpclient = new HttpClient();
-            _httpclient.BaseAddress = new Uri("https://ticketer.ruslan.page/");
+            getTicketsRequest = new GetTicketsRequest(baseAddress);
+            loginRequest = new LoginRequest(baseAddress);
+            registerRequest = new RegisterRequest(baseAddress);
         }
 
         public async Task LoginSimpleRequest(LoginRequestModel loginModel)
         {
-            string jsonData = JsonConvert.SerializeObject(loginModel);
-
-            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpclient.PostAsync("/api/auth/login", content);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                string result = await response.Content.ReadAsStringAsync();
-                _successfulResponseModel = JsonConvert.DeserializeObject<SuccessfulLoginRegistrationResponseModel>(result);
-                SaveData();
-            }
-            else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-                await Application.Current.MainPage.DisplayAlert("Log in operation failed", "Credentials are probably wrong. Check your password and email", "Ok");
-                return;
-            }
+            await loginRequest.MakeRequest(loginModel);
         }
 
         public async Task RegisterSimpleRequest(RegisterRequestModel registerModel)
         {
-            string jsonData = JsonConvert.SerializeObject(registerModel);
-
-            var content = new StringContent(jsonData, Encoding.UTF8 , "application/json");
-            HttpResponseMessage response = await _httpclient.PostAsync("/api/auth/register", content);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                string result = await response.Content.ReadAsStringAsync();
-                _successfulResponseModel = JsonConvert.DeserializeObject<SuccessfulLoginRegistrationResponseModel>(result);
-                SaveData();
-            }
+            await registerRequest.MakeRequest(registerModel);
         }
 
-        private void SaveData()
+        public async Task<List<Ticket>> GetTicketsRequest()
         {
-            Preferences.Set("token", _successfulResponseModel.token);
-            Preferences.Set("expires_at", _successfulResponseModel.expires_at);
-            Preferences.Set("logged_in", true);
+            List<Ticket> tickets = getTicketsRequest.GetRequest().Result;
+            return tickets;
         }
     }
 }

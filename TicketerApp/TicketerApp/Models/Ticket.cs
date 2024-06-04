@@ -4,11 +4,11 @@ using System.Text;
 
 namespace TicketerApp.Models
 {
-    public class Ticket
+    public class Ticket : BasicModel
     {
-        public int Id { get; set; }
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
+        public int id { get; set; }
+        public DateTime start_time { get; set; }
+        public DateTime end_time { get; set; }   
         public string name { get; set; }
         public float price { get; set; }
     }
