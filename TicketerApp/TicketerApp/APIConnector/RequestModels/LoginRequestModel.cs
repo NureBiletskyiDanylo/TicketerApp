@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace TicketerApp.APIConnector.RequestModels
 {
     public class LoginRequestModel
     {
-        public string email { get; set; }
-        public string password { get; set; }
-        public string captcha_key { get; set; }
-        public string mfa_code { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
+        [JsonProperty("password")]
+        public string Password { get; set; }
+        [JsonProperty("captcha_key")]
+        public string CaptchaKey { get; set; }
+        [JsonProperty("mfa_code")]
+        public string MfaCode { get; set; }
     }
 }

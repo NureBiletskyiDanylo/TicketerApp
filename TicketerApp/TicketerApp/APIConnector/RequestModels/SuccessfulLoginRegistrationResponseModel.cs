@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-namespace TicketerApp.APIConnector.RequestModels
+﻿namespace TicketerApp.APIConnector.RequestModels
 {
     public class SuccessfulLoginRegistrationResponseModel
     {
-        public string token {  get; set; }
-        public double expires_at { get; set; }
+        public string Token {  get; set; }
+        public double ExpiresAt { get; set; }
 
         
     }

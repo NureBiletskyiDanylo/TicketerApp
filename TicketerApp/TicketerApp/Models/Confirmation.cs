@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TicketerApp.Models
+﻿namespace TicketerApp.Models
 {
     public class Confirmation : BasicModel
     {

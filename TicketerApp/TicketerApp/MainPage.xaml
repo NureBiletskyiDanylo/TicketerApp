@@ -28,22 +28,22 @@
             </Style>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ButtonsBackgroundDark}, Default={StaticResource ButtonsBackgroundBright},Light={StaticResource ButtonsBackgroundBright}}"></Setter>
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource ButtonsTextColorDark}, Default={StaticResource ButtonsTextColorBright},Light={StaticResource ButtonsTextColorBright}}"></Setter>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ButtonsBackgroundDark}, Default={StaticResource ButtonsBackgroundBright}, Light={StaticResource ButtonsBackgroundBright}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource ButtonsTextColorDark}, Default={StaticResource ButtonsTextColorBright}, Light={StaticResource ButtonsTextColorBright}}" />
             </Style>
-            <Style TargetType="CollectionView" x:Key="CollectionViewBackGroundStyle">
+            <Style x:Key="CollectionViewBackGroundStyle" TargetType="CollectionView">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Light={StaticResource backgroundTabViewBright}, Default={StaticResource backgroundTabViewDefault}}" />
             </Style>
-            <Style TargetType="BoxView" x:Key="TicketBoxViewStyle">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ticketBoxViewBackgroundColorDark}, Default={StaticResource ticketBoxViewBackgroundColorBright}, Light={StaticResource ticketBoxViewBackgroundColorBright}}"></Setter>
+            <Style x:Key="TicketBoxViewStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ticketBoxViewBackgroundColorDark}, Default={StaticResource ticketBoxViewBackgroundColorBright}, Light={StaticResource ticketBoxViewBackgroundColorBright}}" />
             </Style>
-            <Style TargetType="Button" x:Key="LogOutButtonStyle">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonBackgroundDark}, Default={StaticResource logOutButtonBackgroundBright}, Light={StaticResource logOutButtonBackgroundBright}}"></Setter>
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonTextColorDark}, Default={StaticResource logOutButtonTextColorBright}, Light={StaticResource logOutButtonTextColorBright}}"></Setter>
+            <Style x:Key="LogOutButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonBackgroundDark}, Default={StaticResource logOutButtonBackgroundBright}, Light={StaticResource logOutButtonBackgroundBright}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonTextColorDark}, Default={StaticResource logOutButtonTextColorBright}, Light={StaticResource logOutButtonTextColorBright}}" />
             </Style>
 
-            <Style TargetType="BoxView" x:Key="BoxViewBottomBorder">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource boxViewBottomBorderDark}, Default={StaticResource boxViewBottomBorderBright}, Light={StaticResource boxViewBottomBorderBright}}"></Setter>
+            <Style x:Key="BoxViewBottomBorder" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource boxViewBottomBorderDark}, Default={StaticResource boxViewBottomBorderBright}, Light={StaticResource boxViewBottomBorderBright}}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -53,14 +53,14 @@
                 <Style x:Key="settingsGridStyle" TargetType="Grid">
                     <Setter Property="Margin" Value="10,10,0,10" />
                 </Style>
-                <Style TargetType="Label" x:Key="header">
-                    <Setter Property="FontSize" Value="25"></Setter>
-                    <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Light={StaticResource headerTextStyleBright}, Default={StaticResource headerTextStyleBright}}"></Setter>
+                <Style x:Key="header" TargetType="Label">
+                    <Setter Property="FontSize" Value="25" />
+                    <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource headerTextStyleDark}, Light={StaticResource headerTextStyleBright}, Default={StaticResource headerTextStyleBright}}" />
                     <Setter Property="FontAttributes" Value="Bold" />
                 </Style>
-                <Style TargetType="StackLayout" x:Key="headerLayout">
-                    <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                    <Setter Property="Orientation" Value="Horizontal"></Setter>
+                <Style x:Key="headerLayout" TargetType="StackLayout">
+                    <Setter Property="HorizontalOptions" Value="Center" />
+                    <Setter Property="Orientation" Value="Horizontal" />
                 </Style>
                 <Style x:Key="headerLayout_" TargetType="StackLayout">
                     <Setter Property="HorizontalOptions" Value="Center" />
@@ -68,7 +68,7 @@
                 </Style>
             </ResourceDictionary>
         </xct:TabView.Resources>
-        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Tickets" >
+        <xct:TabViewItem Style="{StaticResource TabViewItemStyle}" Text="Tickets">
             <xct:TabViewItem.Content>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -140,12 +140,20 @@
                             Style="{StaticResource PlainTextStyle}"
                             Text="Languages:" />
                         <StackLayout Grid.Row="1" Orientation="Horizontal">
-                            <Button Text="English"  Style="{StaticResource ButtonStyle}"/>
-                            <Button Text="Ukrainian" Style="{StaticResource ButtonStyle}"/>
+                            <Button Style="{StaticResource ButtonStyle}" Text="English" />
+                            <Button Style="{StaticResource ButtonStyle}" Text="Ukrainian" />
                         </StackLayout>
                     </Grid>
-                    <StackLayout  Grid.Row="3">
-                        <Button Text="Log out" Style="{StaticResource LogOutButtonStyle}" FontAttributes="Bold"  Margin="30,0,30,30" BorderColor="White" CornerRadius="50" Scale="0.8" Clicked="logOutClickedEventHandler"></Button>
+                    <StackLayout Grid.Row="3">
+                        <Button
+                            Margin="30,0,30,30"
+                            BorderColor="White"
+                            Clicked="LogOutClickedEventHandler"
+                            CornerRadius="50"
+                            FontAttributes="Bold"
+                            Scale="0.8"
+                            Style="{StaticResource LogOutButtonStyle}"
+                            Text="Log out" />
                     </StackLayout>
                 </Grid>
             </xct:TabViewItem.Content>

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +19,11 @@ namespace TicketerApp.APIConnector.RequestType
             string jsonData = JsonConvert.SerializeObject(registerModel);
 
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await this.client.PostAsync("/api/auth/register", content);
+            HttpResponseMessage response = await Client.PostAsync("/api/auth/register", content);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string result = await response.Content.ReadAsStringAsync();
-                _successfulAuthModel = JsonConvert.DeserializeObject<SuccessfulLoginRegistrationResponseModel>(result);
+                SuccessfulAuthModel = JsonConvert.DeserializeObject<SuccessfulLoginRegistrationResponseModel>(result);
                 SaveData();
             }
         }

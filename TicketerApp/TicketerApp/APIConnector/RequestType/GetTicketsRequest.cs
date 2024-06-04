@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using TicketerApp.Models;
-using TicketerApp.APIConnector.Converters;
-using Xamarin.Forms;
-using Newtonsoft.Json;
 using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
+using TicketerApp.APIConnector.Converters;
+using TicketerApp.Models;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace TicketerApp.APIConnector.RequestType
 {
@@ -16,7 +15,7 @@ namespace TicketerApp.APIConnector.RequestType
     {
         public GetTicketsRequest(Uri baseAddress) : base(baseAddress)
         {
-            converter = new TicketConverter();
+            Converter = new TicketConverter();
         }
         public override async Task<List<Ticket>> GetRequest()
         {
@@ -28,15 +27,14 @@ namespace TicketerApp.APIConnector.RequestType
                 return new List<Ticket>();
             }
 
-            this.client.DefaultRequestHeaders.Add("authorization", token);
-            HttpResponseMessage response = this.client.GetAsync("/api/tickets").Result;
-            int a = 5;
+            this.Client.DefaultRequestHeaders.Add("authorization", token);
+            HttpResponseMessage response = this.Client.GetAsync("/api/tickets").Result;
             List<Ticket> tickets;
             string value = await response.Content.ReadAsStringAsync();
             using (var reader = new JsonTextReader(new StringReader(value)))
             {
                 var serializer = new JsonSerializer();
-                tickets = converter.ReadJson(reader, typeof(List<Ticket>), null, false, serializer);
+                tickets = Converter.ReadJson(reader, typeof(List<Ticket>), null, false, serializer);
             }
             return tickets;
         }

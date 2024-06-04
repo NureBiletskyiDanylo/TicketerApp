@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.Behaviors;
@@ -53,16 +52,16 @@ namespace TicketerApp
             }
             RegisterRequestModel model = new RegisterRequestModel()
             {
-                first_name = _firstNameEntry.Text,
-                last_name = _lastNameEntry.Text,
-                email = _emailEntry.Text,
-                password = _passwordEntry.Text,
-                captcha_key = "123"
+                FirstName = _firstNameEntry.Text,
+                LastName = _lastNameEntry.Text,
+                Email = _emailEntry.Text,
+                Password = _passwordEntry.Text,
+                CaptchaKey = "123"
             };
             await _requestManager.RegisterSimpleRequest(model);
-            if(_requestManager._successfulResponseModel != null)
+            if(_requestManager.SuccessfulAuthResponseModel != null)
             {
-                Application.Current.MainPage = new NavigationPage(new MainPage(_requestManager._successfulResponseModel));
+                Application.Current.MainPage = new NavigationPage(new MainPage(_requestManager.SuccessfulAuthResponseModel));
             }
         }
 

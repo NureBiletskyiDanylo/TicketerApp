@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System;
 using Xamarin.Forms;
 
 namespace TicketerApp.ModelRenderers
@@ -45,13 +44,13 @@ namespace TicketerApp.ModelRenderers
 
                 // Labels for values
                 var nameValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                nameValueLabel.SetBinding(Label.TextProperty, "name");
+                nameValueLabel.SetBinding(Label.TextProperty, "Name");
 
                 var priceValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                priceValueLabel.SetBinding(Label.TextProperty, "price", stringFormat: "${0:F2}");
+                priceValueLabel.SetBinding(Label.TextProperty, "Price", stringFormat: "${0:F2}");
 
                 var timeValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                timeValueLabel.SetBinding(Label.TextProperty, new Binding("start_time", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
+                timeValueLabel.SetBinding(Label.TextProperty, new Binding("StartTime", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
 
                 // Adding headers to the grid
                 grid.Children.Add(nameLabel, 0, 0);

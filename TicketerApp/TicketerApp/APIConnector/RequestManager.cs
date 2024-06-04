@@ -1,50 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using TicketerApp.APIConnector.RequestModels;
-using Newtonsoft.Json;
-using Xamarin.Essentials;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using TicketerApp.Models;
+using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.APIConnector.RequestType;
-using System.IO;
-using TicketerApp.APIConnector.Converters;
-using System.Linq;
+using TicketerApp.Models;
 namespace TicketerApp.APIConnector
 {
     public class RequestManager
     {
-        readonly Uri baseAddress = new Uri("https://ticketer.ruslan.page");
-        LoginRequest loginRequest;
-        RegisterRequest registerRequest;
-        GetTicketsRequest getTicketsRequest;
-        public SuccessfulLoginRegistrationResponseModel _successfulResponseModel;
+        readonly Uri _baseAddress = new Uri("https://ticketer.ruslan.page");
+        LoginRequest _loginRequest;
+        RegisterRequest _registerRequest;
+        GetTicketsRequest _getTicketsRequest;
+        public SuccessfulLoginRegistrationResponseModel SuccessfulAuthResponseModel;
         public RequestManager()
         {
-            getTicketsRequest = new GetTicketsRequest(baseAddress);
-            loginRequest = new LoginRequest(baseAddress);
-            registerRequest = new RegisterRequest(baseAddress);
+            _getTicketsRequest = new GetTicketsRequest(_baseAddress);
+            _loginRequest = new LoginRequest(_baseAddress);
+            _registerRequest = new RegisterRequest(_baseAddress);
         }
 
         public async Task LoginSimpleRequest(LoginRequestModel loginModel)
         {
-            await loginRequest.MakeRequest(loginModel);
-            if(loginRequest._successfulAuthModel != null)
+            await _loginRequest.MakeRequest(loginModel);
+            if(_loginRequest.SuccessfulAuthModel != null)
             {
-                _successfulResponseModel = loginRequest._successfulAuthModel;
+                SuccessfulAuthResponseModel = _loginRequest.SuccessfulAuthModel;
             }
         }
 
         public async Task RegisterSimpleRequest(RegisterRequestModel registerModel)
         {
-            await registerRequest.MakeRequest(registerModel);
+            await _registerRequest.MakeRequest(registerModel);
         }
 
         public async Task<List<Ticket>> GetTicketsRequest()
         {
-            List<Ticket> tickets = getTicketsRequest.GetRequest().Result;
+            List<Ticket> tickets = _getTicketsRequest.GetRequest().Result;
             return tickets;
         }
     }

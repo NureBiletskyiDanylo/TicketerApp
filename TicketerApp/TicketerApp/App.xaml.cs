@@ -1,9 +1,7 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using TicketerApp.APIConnector.RequestModels;
+﻿using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.Utils;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 namespace TicketerApp
 {
     public partial class App : Application
@@ -12,7 +10,6 @@ namespace TicketerApp
         {
             InitializeComponent();
         }
-
         protected override void OnStart()
         {
             SetTheme();
@@ -43,7 +40,7 @@ namespace TicketerApp
             {
                 double currentTimeStamp = UnixStampToDateTimeConverter.GetCurrentUnixTimeStamp();
                 double expires_at = Preferences.Get("expires_at", currentTimeStamp);
-                SuccessfulLoginRegistrationResponseModel model = new SuccessfulLoginRegistrationResponseModel() { token = Preferences.Get("token", null), expires_at = expires_at };
+                SuccessfulLoginRegistrationResponseModel model = new SuccessfulLoginRegistrationResponseModel() { Token = Preferences.Get("token", null), ExpiresAt = expires_at };
                 MainPage = new NavigationPage(new MainPage(model));
             }
             else

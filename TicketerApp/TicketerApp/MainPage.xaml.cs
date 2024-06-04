@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.ModelRenderers;
@@ -17,8 +12,8 @@ namespace TicketerApp
     public partial class MainPage
     {
         RequestManager _requestManager;
-        private Button brightThemeButton;
-        private Button darkThemeButton;
+        private Button _brightThemeButton;
+        private Button _darkThemeButton;
         private SuccessfulLoginRegistrationResponseModel _model;
         public MainPage(SuccessfulLoginRegistrationResponseModel model)
         {
@@ -33,12 +28,12 @@ namespace TicketerApp
 
         void ThemeChange(object sender, EventArgs e)
         {
-            if (sender == brightThemeButton)
+            if (sender == _brightThemeButton)
             {
                 App.Current.UserAppTheme = OSAppTheme.Light;
                 Preferences.Set("theme", "bright");
             }
-            else if (sender == darkThemeButton)
+            else if (sender == _darkThemeButton)
             {
                 App.Current.UserAppTheme = OSAppTheme.Dark;
                 Preferences.Set("theme", "dark");
@@ -52,10 +47,10 @@ namespace TicketerApp
 
         void ThemeButtonsInitialization()
         {
-            brightThemeButton = FindByName("bright") as Button;
-            darkThemeButton = FindByName("dark") as Button;
-            brightThemeButton.Clicked += ThemeChange;
-            darkThemeButton.Clicked += ThemeChange;
+            _brightThemeButton = FindByName("bright") as Button;
+            _darkThemeButton = FindByName("dark") as Button;
+            _brightThemeButton.Clicked += ThemeChange;
+            _darkThemeButton.Clicked += ThemeChange;
         }
 
         void StackLayoutRendererInitialization()
@@ -77,7 +72,7 @@ namespace TicketerApp
             ticketRenderer.Render(ticketsStyle, (boxViewBottomBorderStyle, boxViewTicketsStyle), tickets);
         }
 
-        private void logOutClickedEventHandler(object sender, EventArgs e)
+        private void LogOutClickedEventHandler(object sender, EventArgs e)
         {
             Preferences.Set("logged_in", false);
             Preferences.Remove("token");

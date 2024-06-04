@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using TicketerApp.Models;
 
 namespace TicketerApp.APIConnector.Converters
@@ -17,11 +16,11 @@ namespace TicketerApp.APIConnector.Converters
             {
                 var ticket = new Ticket()
                 {
-                    id = (int)item["id"],
-                    price = (float)item["plan"]["price"],
-                    name = (string)item["event"]["name"],
-                    start_time = DateTimeOffset.FromUnixTimeSeconds((long)item["event"]["start_time"]).DateTime,
-                    end_time = DateTimeOffset.FromUnixTimeSeconds((long)item["event"]["end_time"]).DateTime
+                    Id = (int)item["id"],
+                    Price = (float)item["plan"]["price"],
+                    Name = (string)item["event"]["name"],
+                    StartTime = DateTimeOffset.FromUnixTimeSeconds((long)item["event"]["start_time"]).DateTime,
+                    EndTime = DateTimeOffset.FromUnixTimeSeconds((long)item["event"]["end_time"]).DateTime
                 };
                 tickets.Add(ticket);
             }

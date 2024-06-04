@@ -33,15 +33,15 @@ namespace TicketerApp
             }
             LoginRequestModel loginModel = new LoginRequestModel()
             {
-                email = _emailEntry.Text,
-                password = _passwordEntry.Text,
-                mfa_code = "123",
-                captcha_key = "123"
+                Email = _emailEntry.Text,
+                Password = _passwordEntry.Text,
+                MfaCode = "123",
+                CaptchaKey = "123"
             };
             await _manager.LoginSimpleRequest(loginModel);
-            if(_manager._successfulResponseModel != null)
+            if(_manager.SuccessfulAuthResponseModel != null)
             {
-                Application.Current.MainPage = new NavigationPage(new MainPage(_manager._successfulResponseModel));
+                Application.Current.MainPage = new NavigationPage(new MainPage(_manager.SuccessfulAuthResponseModel));
             }
         }
 
@@ -50,8 +50,12 @@ namespace TicketerApp
             PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
         }
 
+        [Obsolete]
         private void OnForgotPasswordClicked(object sender, EventArgs e)
         {
+            Application.Current.MainPage.DisplayAlert("Forgot password?", "To restore your password you have to visit our site", "Ok");
+            string url = "https://www.nimh.nih.gov/health/find-help";
+            Device.OpenUri(new Uri(url));
         }
         private void OnQuitButtonClicked(object sender, EventArgs e)
         {
