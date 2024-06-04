@@ -51,7 +51,7 @@ namespace TicketerApp.ModelRenderers
                 priceValueLabel.SetBinding(Label.TextProperty, "price", stringFormat: "${0:F2}");
 
                 var timeValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                timeValueLabel.SetBinding(Label.TextProperty, new Binding("startTime", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
+                timeValueLabel.SetBinding(Label.TextProperty, new Binding("start_time", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
 
                 // Adding headers to the grid
                 grid.Children.Add(nameLabel, 0, 0);

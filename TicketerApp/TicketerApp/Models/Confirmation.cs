@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicketerApp.Models
 {
-    public class Confirmation
+    public class Confirmation : BasicModel
     {
         public int PaymentId { get; set; }
         public int CorrectConfirmationAnswer { get; set; }

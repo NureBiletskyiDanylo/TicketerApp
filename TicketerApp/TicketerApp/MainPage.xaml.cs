@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.ModelRenderers;
 using TicketerApp.Models;
@@ -15,12 +16,14 @@ namespace TicketerApp
 {
     public partial class MainPage
     {
+        RequestManager _requestManager;
         private Button brightThemeButton;
         private Button darkThemeButton;
         private SuccessfulLoginRegistrationResponseModel _model;
         public MainPage(SuccessfulLoginRegistrationResponseModel model)
         {
             InitializeComponent();
+            _requestManager = new RequestManager();
             ObservableCollection<Confirmation> requestsToConfirm = new ObservableCollection<Confirmation>();
             // some code to get all requests
             _model = model;
@@ -70,8 +73,8 @@ namespace TicketerApp
             TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
             Style ticketsStyle = (Style)this.Resources["CollectionViewBackGroundStyle"];
             Style boxViewTicketsStyle = (Style)this.Resources["TicketBoxViewStyle"];
-            
-            ticketRenderer.Render(ticketsStyle, (boxViewBottomBorderStyle, boxViewTicketsStyle));
+            ObservableCollection<Ticket> tickets = new ObservableCollection<Ticket>(_requestManager.GetTicketsRequest().Result);
+            ticketRenderer.Render(ticketsStyle, (boxViewBottomBorderStyle, boxViewTicketsStyle), tickets);
         }
 
         private void logOutClickedEventHandler(object sender, EventArgs e)
