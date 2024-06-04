@@ -16,7 +16,7 @@ namespace TicketerApp.APIConnector
 {
     public class RequestManager
     {
-        readonly Uri baseAddress = new Uri("https://ticketer.ruslan.page/");
+        readonly Uri baseAddress = new Uri("https://ticketer.ruslan.page");
         LoginRequest loginRequest;
         RegisterRequest registerRequest;
         GetTicketsRequest getTicketsRequest;
@@ -31,6 +31,10 @@ namespace TicketerApp.APIConnector
         public async Task LoginSimpleRequest(LoginRequestModel loginModel)
         {
             await loginRequest.MakeRequest(loginModel);
+            if(loginRequest._successfulAuthModel != null)
+            {
+                _successfulResponseModel = loginRequest._successfulAuthModel;
+            }
         }
 
         public async Task RegisterSimpleRequest(RegisterRequestModel registerModel)

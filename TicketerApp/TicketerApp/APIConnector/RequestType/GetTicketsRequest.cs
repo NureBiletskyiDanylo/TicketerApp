@@ -29,10 +29,11 @@ namespace TicketerApp.APIConnector.RequestType
             }
 
             this.client.DefaultRequestHeaders.Add("authorization", token);
-            HttpResponseMessage response = await this.client.GetAsync("/tickets");
+            HttpResponseMessage response = this.client.GetAsync("/api/tickets").Result;
             int a = 5;
             List<Ticket> tickets;
-            using (var reader = new JsonTextReader(new StringReader(response.Content.ToString())))
+            string value = await response.Content.ReadAsStringAsync();
+            using (var reader = new JsonTextReader(new StringReader(value)))
             {
                 var serializer = new JsonSerializer();
                 tickets = converter.ReadJson(reader, typeof(List<Ticket>), null, false, serializer);

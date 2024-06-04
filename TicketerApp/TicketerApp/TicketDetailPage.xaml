@@ -76,17 +76,17 @@
                         </StackLayout>
                         <StackLayout Grid.Row="1" Style="{StaticResource stackLayoutStyle}">
                             <Label Style="{StaticResource plainTextStyle}" Text="It starts on "></Label>
-                            <Label Text="{Binding startTime}" Style="{StaticResource dataTextStyle}"></Label>
+                            <Label Text="{Binding start_time}" Style="{StaticResource dataTextStyle}"></Label>
                         </StackLayout>
                         <StackLayout Grid.Row="2" Style="{StaticResource stackLayoutStyle}">
                             <Label Style="{StaticResource plainTextStyle}" Text="It ends on"></Label>
-                            <Label Text="{Binding endTime}" Style="{StaticResource dataTextStyle}"></Label>
+                            <Label Text="{Binding end_time}" Style="{StaticResource dataTextStyle}"></Label>
                         </StackLayout>
                     </Grid>
                 </Grid>
             </Frame>
             <StackLayout Grid.Row="2" x:Name="qrcodeStackLayout">
-                <zxing:ZXingBarcodeImageView WidthRequest="300" HeightRequest="300" BarcodeValue="{Binding Id}" BarcodeFormat="QR_CODE">
+                <zxing:ZXingBarcodeImageView WidthRequest="300" HeightRequest="300" BarcodeValue="{Binding id}" BarcodeFormat="QR_CODE">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxcm:EncodingOptions Height="300" Width="300"></zxcm:EncodingOptions>
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
