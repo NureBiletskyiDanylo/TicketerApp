@@ -1,8 +1,12 @@
 ﻿using Plugin.FirebasePushNotification;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.Fcm;
 using TicketerApp.APIConnector.RequestModels;
+using TicketerApp.ModelRenderers;
+using TicketerApp.Models;
 using TicketerApp.Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -16,7 +20,16 @@ namespace TicketerApp
             InitializeComponent();
             _manager = new FcmTokenManager();
             LoggedInCheck();
+            CrossFirebasePushNotification.Current.OnNotificationReceived += OnReceiveNotification;
         }
+
+        private void OnReceiveNotification(object source, FirebasePushNotificationDataEventArgs e)
+        {
+            RequestManager manager = new RequestManager();
+            ObservableCollection<Ticket> tickets = new ObservableCollection<Ticket>(manager.GetTicketsRequest(false).Result);
+            ConfirmationCollectionViewDesign.ToConfirm = tickets;
+        }
+
         protected override void OnStart()
         {
             SetTheme();
@@ -55,7 +68,6 @@ namespace TicketerApp
                 {
                     return;
                 }
-                CrossFirebasePushNotification.Current.OnNotificationReceived += notR;
                 _manager.SendFcmToken(fcmToken, authToken).Wait(1000);
                 double currentTimeStamp = UnixStampToDateTimeConverter.GetCurrentUnixTimeStamp();
                 double expires_at = Preferences.Get("expires_at", currentTimeStamp);
@@ -67,12 +79,6 @@ namespace TicketerApp
                 MainPage = new NavigationPage(new Login());
             }
         }
-
-        private void notR(object source, FirebasePushNotificationDataEventArgs e)
-        {
-            MainPage.DisplayAlert("ALERT", "ALERT", "ALERT");
-        }
-
 
 
         private void SetTheme()

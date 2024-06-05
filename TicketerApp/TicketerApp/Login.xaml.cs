@@ -60,7 +60,7 @@ namespace TicketerApp
         private void OnForgotPasswordClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage.DisplayAlert("Forgot password?", "To restore your password you have to visit our site", "Ok");
-            string url = "https://www.nimh.nih.gov/health/find-help";
+            string url = "https://www.google.com/";
             Device.OpenUri(new Uri(url));
         }
         private void OnQuitButtonClicked(object sender, EventArgs e)

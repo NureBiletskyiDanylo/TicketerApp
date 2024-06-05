@@ -20,7 +20,6 @@ namespace TicketerApp
         {
             InitializeComponent();
             _requestManager = new RequestManager();
-            ObservableCollection<Confirmation> requestsToConfirm = new ObservableCollection<Confirmation>();
             // some code to get all requests
             _model = model;
             ThemeButtonsInitialization();
@@ -61,15 +60,16 @@ namespace TicketerApp
             Style boxViewBottomBorderStyle = (Style)this.Resources["BoxViewBottomBorder"];
 
             StackLayout confirmationStackLayout = FindByName("ConfirmationGridList") as StackLayout;
-            ConfirmationRenderer confirmationRenderer = new ConfirmationRenderer(confirmationStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
+            ConfirmationRenderer confirmationRenderer = new ConfirmationRenderer(_requestManager, confirmationStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
             Style confirmationStyle = (Style)this.Resources["CollectionViewBackGroundStyle"];
             Style boxViewConfirmationStyle = (Style)this.Resources["TicketBoxViewStyle"];
-            confirmationRenderer.Render(confirmationStyle, (boxViewBottomBorderStyle, boxViewConfirmationStyle), notConfirmedTickets);
+            TicketsStyleCollection collection = TicketsStyleCollectionInitializer();
+            confirmationRenderer.Render(collection, notConfirmedTickets, confirmedTickets);
 
 
             StackLayout ticketsStackLayout = FindByName("TicketsGridList") as StackLayout;
             TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
-            TicketsStyleCollection collection = TicketsStyleCollectionInitializer();
+
 
             ticketRenderer.Render(collection, confirmedTickets);
         }

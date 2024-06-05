@@ -1,85 +1,60 @@
 ﻿using System.Collections.ObjectModel;
+using TicketerApp.APIConnector;
+using TicketerApp.Models;
 using Xamarin.Forms;
 
 namespace TicketerApp.ModelRenderers
 {
     public static class ConfirmationCollectionViewDesign
     {
-        public static CollectionView CreateStyledCollectionView<T>(ObservableCollection<T> items, (Style, Style) boxViewStyles)
+        static ElementCreator _creator = new ElementCreator();
+        public static ObservableCollection<Ticket> ToConfirm;
+        public static CollectionView CreateConfirmationStyledCollectionView<T>(RequestManager manager, ObservableCollection<T> tickets, TicketsStyleCollection collection, INavigation navigation, ObservableCollection<T> confirmed) where T : TicketerApp.Models.Ticket
         {
+            ToConfirm = tickets as ObservableCollection<Ticket>;
             var listView = new CollectionView
             {
-                SelectionMode = SelectionMode.Single,
-                ItemsSource = items,
+                ItemsSource = tickets,
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    var boxViewBackground = new BoxView
-                    {
-                        Style = boxViewStyles.Item2,
-                        Opacity = 0.5 // Reduce the background opacity a bit
-                    };
+                    Grid mainGrid = _creator.CreateGrid(true);
+                    Frame mainFrame = _creator.CreateFrame(collection.outerFrameTicketsStyle, true);
+                    Grid inFrameGrid = _creator.CreateGrid(false);
+                    Grid leftGrid = _creator.CreateGridWithRows();
+                    StackLayout rightLayout = _creator.CreateStackLayout();
+                    Frame innerFrame = _creator.CreateFrame(collection.innerFrameTicketsStyle, false);
+                    mainFrame.Content = inFrameGrid;
+                    inFrameGrid.Children.Add(leftGrid);
+                    inFrameGrid.Children.Add(rightLayout);
 
-                    var grid = new Grid
+                    Label eventTextLabel = _creator.CreateLabel(20, collection.textColorTicketsStyle);
+                    Label startsAtLabel = _creator.CreateLabel(14, collection.textColorTicketsStyle);
+                    eventTextLabel.SetBinding(Label.TextProperty, "Name");
+                    startsAtLabel.SetBinding(Label.TextProperty, new Binding("ConfirmationAbilityExpiringDate", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
+                    Grid.SetRow(eventTextLabel, 0);
+                    Grid.SetRow(startsAtLabel, 1);
+                    leftGrid.Children.Add(eventTextLabel);
+                    leftGrid.Children.Add(startsAtLabel);
+
+                    Label priceLabel = _creator.CreateLabel(16, collection.priceColorTicketsStyle);
+                    priceLabel.SetBinding(Label.TextProperty, "Price", stringFormat: "${0:F2}");
+                    innerFrame.Content = priceLabel;
+                    rightLayout.Children.Add(innerFrame);
+                    mainGrid.Children.Add(mainFrame);
+
+
+                    var tapGestureRecognizer = new TapGestureRecognizer();
+                    tapGestureRecognizer.Tapped += async (s, e) =>
                     {
-                        ColumnDefinitions =
+                        var selectedTicket = (T)((BindableObject)s).BindingContext;
+                        if (selectedTicket != null)
                         {
-                            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-                        },
-                        RowDefinitions =
-                        {
-                            new RowDefinition { Height = GridLength.Auto },
-                            new RowDefinition { Height = GridLength.Auto }
+                            navigation.PushAsync(new ConfirmationDetailPage(selectedTicket, manager, ToConfirm, TicketCollectionViewDesign.Tickets));
                         }
                     };
+                    mainFrame.GestureRecognizers.Add(tapGestureRecognizer);
 
-                    var eventTitleLabel = CreateLabel("Event Title:", 14, FontAttributes.Bold, TextAlignment.Center);
-                    var priceToPayLabel = CreateLabel("Price To Pay:", 14, FontAttributes.Bold, TextAlignment.Center);
-                    var mfaRequiredLabel = CreateLabel("MFA Required:", 14, FontAttributes.Bold, TextAlignment.Center);
-
-                    var eventTitleValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                    eventTitleValueLabel.SetBinding(Label.TextProperty, "Name");
-
-                    var priceToPayValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                    priceToPayValueLabel.SetBinding(Label.TextProperty, "Price", stringFormat: "${0:F2}");
-
-                    var confirmationExpiresAtLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                    confirmationExpiresAtLabel.SetBinding(Label.TextProperty, new Binding("ConfirmationAbilityExpiringDate", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
-
-                    grid.Children.Add(eventTitleLabel, 0, 0);
-                    grid.Children.Add(priceToPayLabel, 1, 0);
-                    grid.Children.Add(mfaRequiredLabel, 2, 0);
-
-                    grid.Children.Add(eventTitleValueLabel, 0, 1);
-                    grid.Children.Add(priceToPayValueLabel, 1, 1);
-                    grid.Children.Add(confirmationExpiresAtLabel, 2, 1);
-
-                    var absoluteLayout = new AbsoluteLayout();
-
-                    var bottomBorder = new BoxView
-                    {
-                        HeightRequest = 1,
-                        Style = boxViewStyles.Item1,
-                    };
-
-                    // Position the grid and background BoxView with absolute positioning
-                    AbsoluteLayout.SetLayoutFlags(bottomBorder, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
-                    AbsoluteLayout.SetLayoutBounds(bottomBorder, new Rectangle(0, 1, 1, AbsoluteLayout.AutoSize));
-                    AbsoluteLayout.SetLayoutFlags(grid, AbsoluteLayoutFlags.All);
-                    AbsoluteLayout.SetLayoutBounds(grid, new Rectangle(0, 0, 1, 1));
-                    AbsoluteLayout.SetLayoutFlags(boxViewBackground, AbsoluteLayoutFlags.All);
-                    AbsoluteLayout.SetLayoutBounds(boxViewBackground, new Rectangle(0, 0, 1, 1));
-                    // Create a bottom border
-
-                    AbsoluteLayout.SetLayoutFlags(bottomBorder, AbsoluteLayoutFlags.PositionProportional | AbsoluteLayoutFlags.WidthProportional);
-                    AbsoluteLayout.SetLayoutBounds(bottomBorder, new Rectangle(0, 1, 1, AbsoluteLayout.AutoSize));
-
-                    absoluteLayout.Children.Add(boxViewBackground);
-                    absoluteLayout.Children.Add(grid);
-                    absoluteLayout.Children.Add(bottomBorder);
-
-                    return new ContentView { Content = absoluteLayout };
+                    return new ContentView { Content = mainGrid };
                 })
             };
 

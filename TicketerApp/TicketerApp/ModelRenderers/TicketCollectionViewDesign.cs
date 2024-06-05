@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using TicketerApp.Models;
 using Xamarin.Forms;
 
 namespace TicketerApp.ModelRenderers
@@ -6,9 +7,10 @@ namespace TicketerApp.ModelRenderers
     public static class TicketCollectionViewDesign
     {
         static ElementCreator _creator = new ElementCreator();
-
+        public static ObservableCollection<Ticket> Tickets { get; set; }
         public static CollectionView CreateStyledTicketCollectionView<T>(ObservableCollection<T> tickets, TicketsStyleCollection collection, INavigation navigation) where T : TicketerApp.Models.Ticket
         {
+            Tickets = tickets as ObservableCollection<Ticket>;
             var listView = new CollectionView
             {
                 ItemsSource = tickets,
