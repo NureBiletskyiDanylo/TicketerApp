@@ -38,8 +38,11 @@
         <Color x:Key="logOutButtonTextColorDark">Black</Color>
         <Color x:Key="logOutButtonTextColorBright">White</Color>
 
-        <Color x:Key="ticketBoxViewBackgroundColorDark">#20232a</Color>
-        <Color x:Key="ticketBoxViewBackgroundColorBright">#1E90FF</Color>
+        <Color x:Key="ticketFrameBackgroundColorDark">#20232a</Color>
+        <Color x:Key="ticketFrameBackgroundColorBright">#8CC5FC</Color>
+
+        <Color x:Key="ticketInnerFrameBackgroundColorDark">#eeba2c</Color>
+        <Color x:Key="ticketInnerFrameBackgroundColorBright">#34587A</Color>
 
         <Color x:Key="boxViewBottomBorderDark">#eeba2c</Color>
         <Color x:Key="boxViewBottomBorderBright">Black</Color>
@@ -62,5 +65,7 @@
         <Color x:Key="loginRegisterButtonColorDark">#2ceeba</Color>
         <Color x:Key="loginRegisterButtonColorBright">DarkGray</Color>
 
+        <Color x:Key="ticketTemplateColorDark">White</Color>
+        <Color x:Key="ticketTemplateColorBright">White</Color>
     </Application.Resources>
 </Application>

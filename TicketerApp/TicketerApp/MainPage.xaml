@@ -34,8 +34,20 @@
             <Style x:Key="CollectionViewBackGroundStyle" TargetType="CollectionView">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource backgroundTabViewDark}, Light={StaticResource backgroundTabViewBright}, Default={StaticResource backgroundTabViewDefault}}" />
             </Style>
+            <Style x:Key="TicketOuterFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ticketFrameBackgroundColorDark}, Default={StaticResource ticketFrameBackgroundColorBright}, Light={StaticResource ticketFrameBackgroundColorBright}}" />
+            </Style>
+            <Style x:Key="TicketInnerFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ticketInnerFrameBackgroundColorDark}, Default={StaticResource ticketInnerFrameBackgroundColorBright}, Light={StaticResource ticketInnerFrameBackgroundColorBright}}" />
+            </Style>
+            <Style x:Key="TextColorStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource ticketTemplateColorDark}, Default={StaticResource ticketTemplateColorBright}, Light={StaticResource ticketTemplateColorBright}}" />
+            </Style>
+            <Style x:Key="PriceColorStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonTextColorDark}, Default={StaticResource logOutButtonTextColorBright}, Light={StaticResource logOutButtonTextColorBright}}" />
+            </Style>
             <Style x:Key="TicketBoxViewStyle" TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ticketBoxViewBackgroundColorDark}, Default={StaticResource ticketBoxViewBackgroundColorBright}, Light={StaticResource ticketBoxViewBackgroundColorBright}}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource ticketFrameBackgroundColorDark}, Default={StaticResource ticketFrameBackgroundColorBright}, Light={StaticResource ticketFrameBackgroundColorBright}}" />
             </Style>
             <Style x:Key="LogOutButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource logOutButtonBackgroundDark}, Default={StaticResource logOutButtonBackgroundBright}, Light={StaticResource logOutButtonBackgroundBright}}" />

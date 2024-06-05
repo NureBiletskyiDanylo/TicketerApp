@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using TicketerApp.APIConnector;
 using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.ModelRenderers;
@@ -66,10 +67,9 @@ namespace TicketerApp
 
             StackLayout ticketsStackLayout = FindByName("TicketsGridList") as StackLayout;
             TicketRenderer ticketRenderer = new TicketRenderer(ticketsStackLayout, (Style)this.Resources["PlainTextStyle"], this.Navigation);
-            Style ticketsStyle = (Style)this.Resources["CollectionViewBackGroundStyle"];
-            Style boxViewTicketsStyle = (Style)this.Resources["TicketBoxViewStyle"];
+            TicketsStyleCollection collection = TicketsStyleCollectionInitializer();
             ObservableCollection<Ticket> tickets = new ObservableCollection<Ticket>(_requestManager.GetTicketsRequest().Result);
-            ticketRenderer.Render(ticketsStyle, (boxViewBottomBorderStyle, boxViewTicketsStyle), tickets);
+            ticketRenderer.Render(collection, tickets);
         }
 
         private void LogOutClickedEventHandler(object sender, EventArgs e)
@@ -78,6 +78,17 @@ namespace TicketerApp
             Preferences.Remove("token");
             Preferences.Remove("expires_at");
             Application.Current.MainPage = new NavigationPage(new Login());
+        }
+
+        private TicketsStyleCollection TicketsStyleCollectionInitializer()
+        {
+            Style ticketsStyle = (Style)this.Resources["CollectionViewBackGroundStyle"];
+            Style outerFrameTicketsStyle = (Style)this.Resources["TicketOuterFrameStyle"];
+            Style innerFrameTicketsStyle = (Style)this.Resources["TicketInnerFrameStyle"];
+            Style priceTicketsTextColorStyle = (Style)this.Resources["PriceColorStyle"];
+            Style plainTicketsTextColorStyle = (Style)this.Resources["TextColorStyle"];
+            TicketsStyleCollection collection = new TicketsStyleCollection(ticketsStyle, outerFrameTicketsStyle, innerFrameTicketsStyle, plainTicketsTextColorStyle, priceTicketsTextColorStyle);
+            return collection;
         }
     }
 }

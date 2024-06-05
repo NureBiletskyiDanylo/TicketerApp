@@ -20,7 +20,7 @@ namespace TicketerApp.ModelRenderers
             _navigation = navigation;
         }
 
-        public void Render(Style collectionViewStyle, (Style, Style) boxViewStyles, ObservableCollection<Ticket> tickets)
+        public void Render(TicketsStyleCollection collection, ObservableCollection<Ticket> tickets)
         {
             if (_stackLayout == null)
             {
@@ -30,8 +30,8 @@ namespace TicketerApp.ModelRenderers
             _tickets = tickets;
             if (_tickets.Count > 0)
             {
-                _collectionView = TicketCollectionViewDesign.CreateStyledTicketCollectionView(_tickets, boxViewStyles);
-                _collectionView.Style = collectionViewStyle;
+                _collectionView = TicketCollectionViewDesign.CreateStyledTicketCollectionView(_tickets, collection);
+                _collectionView.Style = collection.ticketsStyleBackground;
                 _collectionView.SelectionChanged += selectedTicket;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(_collectionView);
