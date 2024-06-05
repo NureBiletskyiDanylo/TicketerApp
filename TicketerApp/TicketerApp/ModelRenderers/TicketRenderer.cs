@@ -26,13 +26,12 @@ namespace TicketerApp.ModelRenderers
             {
                 throw new ArgumentNullException(nameof(_stackLayout));
             }
-            // Создаем один билет
+
             _tickets = tickets;
             if (_tickets.Count > 0)
             {
-                _collectionView = TicketCollectionViewDesign.CreateStyledTicketCollectionView(_tickets, collection);
+                _collectionView = TicketCollectionViewDesign.CreateStyledTicketCollectionView(_tickets, collection, _navigation);
                 _collectionView.Style = collection.ticketsStyleBackground;
-                _collectionView.SelectionChanged += selectedTicket;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(_collectionView);
             }
@@ -41,20 +40,6 @@ namespace TicketerApp.ModelRenderers
                 Label noTicketLabel = _plainTextRenderer.Label;
                 _stackLayout.Children.Clear();
                 _stackLayout.Children.Add(noTicketLabel);
-            }
-        }
-        async void selectedTicket(Object sender, SelectionChangedEventArgs e)
-        {
-            Ticket ticket = (Ticket)((CollectionView)sender).SelectedItem;
-            if (ticket != null)
-            {
-
-                await _navigation.PushAsync(new TicketDetailPage(ticket));
-
-                _collectionView.SelectionChanged -= selectedTicket;
-                ((CollectionView)sender).SelectedItem = null;
-                _collectionView.SelectionChanged += selectedTicket;
-
             }
         }
     }
