@@ -9,12 +9,14 @@ namespace TicketerApp.APIConnector
     public class RequestManager
     {
         readonly Uri _baseAddress = new Uri("https://ticketer.ruslan.page");
+        TicketsAnalyzer _analyzer;
         LoginRequest _loginRequest;
         RegisterRequest _registerRequest;
         GetTicketsRequest _getTicketsRequest;
         public SuccessfulLoginRegistrationResponseModel SuccessfulAuthResponseModel;
         public RequestManager()
         {
+            _analyzer = new TicketsAnalyzer();
             _getTicketsRequest = new GetTicketsRequest(_baseAddress);
             _loginRequest = new LoginRequest(_baseAddress);
             _registerRequest = new RegisterRequest(_baseAddress);
@@ -34,10 +36,15 @@ namespace TicketerApp.APIConnector
             await _registerRequest.MakeRequest(registerModel);
         }
 
-        public async Task<List<Ticket>> GetTicketsRequest()
+        public async Task<List<Ticket>> GetTicketsRequest(bool confirmed)
         {
             List<Ticket> tickets = _getTicketsRequest.GetRequest().Result;
-            return tickets;
+            _analyzer.InitializeTicketSort(tickets);
+            if(confirmed)
+            {
+                return _analyzer.GetConfirmedTickets();
+            }
+            return _analyzer.GetNotConfirmedTickets();
         }
     }
 }

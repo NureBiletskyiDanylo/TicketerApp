@@ -26,8 +26,10 @@ namespace TicketerApp.APIConnector.RequestType
                 await Application.Current.MainPage.DisplayAlert("Something went wrong", "Can't get tickets", "Ok");
                 return new List<Ticket>();
             }
-
-            this.Client.DefaultRequestHeaders.Add("authorization", token);
+            if (!this.Client.DefaultRequestHeaders.Contains("authorization"))
+            {
+                this.Client.DefaultRequestHeaders.Add("authorization", token);
+            }
             HttpResponseMessage response = this.Client.GetAsync("/api/tickets").Result;
             List<Ticket> tickets;
             string value = await response.Content.ReadAsStringAsync();

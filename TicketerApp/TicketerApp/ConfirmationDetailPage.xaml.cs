@@ -7,10 +7,10 @@ namespace TicketerApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ConfirmationDetailPage : ContentPage
 	{
-		public ConfirmationDetailPage (Confirmation selectedConfirmation)
+		public ConfirmationDetailPage (Ticket ticketToConfirm)
 		{
 			InitializeComponent ();
-			BindingContext = selectedConfirmation;
+			BindingContext = ticketToConfirm;
 		}
 	}
 }

@@ -39,13 +39,13 @@ namespace TicketerApp.ModelRenderers
                     var mfaRequiredLabel = CreateLabel("MFA Required:", 14, FontAttributes.Bold, TextAlignment.Center);
 
                     var eventTitleValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                    eventTitleValueLabel.SetBinding(Label.TextProperty, "EventTitle");
+                    eventTitleValueLabel.SetBinding(Label.TextProperty, "Name");
 
                     var priceToPayValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                    priceToPayValueLabel.SetBinding(Label.TextProperty, "PriceToPay", stringFormat: "${0:F2}");
+                    priceToPayValueLabel.SetBinding(Label.TextProperty, "Price", stringFormat: "${0:F2}");
 
-                    var mfaRequiredValueLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
-                    mfaRequiredValueLabel.SetBinding(Label.TextProperty, "MfaRequired", stringFormat: "{0:Yes;No}");
+                    var confirmationExpiresAtLabel = CreateLabel(string.Empty, 14, FontAttributes.None, TextAlignment.Center);
+                    confirmationExpiresAtLabel.SetBinding(Label.TextProperty, new Binding("ConfirmationAbilityExpiringDate", stringFormat: "{0:HH:mm} - {1:HH:mm}"));
 
                     grid.Children.Add(eventTitleLabel, 0, 0);
                     grid.Children.Add(priceToPayLabel, 1, 0);
@@ -53,7 +53,7 @@ namespace TicketerApp.ModelRenderers
 
                     grid.Children.Add(eventTitleValueLabel, 0, 1);
                     grid.Children.Add(priceToPayValueLabel, 1, 1);
-                    grid.Children.Add(mfaRequiredValueLabel, 2, 1);
+                    grid.Children.Add(confirmationExpiresAtLabel, 2, 1);
 
                     var absoluteLayout = new AbsoluteLayout();
 

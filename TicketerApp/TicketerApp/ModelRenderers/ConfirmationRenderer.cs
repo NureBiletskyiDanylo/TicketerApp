@@ -8,28 +8,27 @@ namespace TicketerApp.ModelRenderers
     public class ConfirmationRenderer
     {
         private readonly INavigation _navigation;
-        private ObservableCollection<Confirmation> _confirmations = new ObservableCollection<Confirmation>();
+        private ObservableCollection<Ticket> _notConfirmedTickets = new ObservableCollection<Ticket>();
         private PlainTextRenderer _plainTextRenderer;
         private StackLayout _stackLayout;
         private CollectionView _collectionView;
         public ConfirmationRenderer(StackLayout layout, Style style, INavigation navigation)
         {
             _stackLayout = layout;
-            _confirmations.Add(new Confirmation { PaymentId = 1, CorrectConfirmationAnswer = 123, EventTitle = "Event 1", PriceToPay = 49.99f, MfaRequired = true, MfaCode = "ABC123" });
             _plainTextRenderer = new PlainTextRenderer("There are no confirmation requests", style);
             _navigation = navigation;
         }
 
-        public void Render(Style collectionViewStyle, (Style, Style)boxViewStyles)
+        public void Render(Style collectionViewStyle, (Style, Style)boxViewStyles, ObservableCollection<Ticket> notConfirmedTickets)
         {
             if (_stackLayout == null)
             {
                 throw new ArgumentNullException(nameof(_stackLayout));
             }
-
-            if (_confirmations.Count > 0)
+            _notConfirmedTickets = notConfirmedTickets;
+            if (_notConfirmedTickets.Count > 0)
             {
-                _collectionView = ConfirmationCollectionViewDesign.CreateStyledCollectionView(_confirmations, boxViewStyles);
+                _collectionView = ConfirmationCollectionViewDesign.CreateStyledCollectionView(_notConfirmedTickets, boxViewStyles);
                 _collectionView.Style = collectionViewStyle;
                 _collectionView.SelectionChanged += selectedConfirmation;
                 _stackLayout.Children.Clear();
@@ -45,10 +44,10 @@ namespace TicketerApp.ModelRenderers
 
         async void selectedConfirmation(Object sender, SelectionChangedEventArgs e)
         {
-            Confirmation confirmation = (Confirmation)((CollectionView)sender).SelectedItem;
-            if (confirmation != null)
+            Ticket ticket = (Ticket)((CollectionView)sender).SelectedItem;
+            if (ticket != null)
             {
-                await _navigation.PushAsync(new ConfirmationDetailPage(confirmation));
+                await _navigation.PushAsync(new ConfirmationDetailPage(ticket));
 
                 _collectionView.SelectionChanged -= selectedConfirmation;
                 ((CollectionView)sender).SelectedItem = null;
