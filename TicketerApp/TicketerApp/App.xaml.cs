@@ -1,4 +1,7 @@
-﻿using TicketerApp.APIConnector.RequestModels;
+﻿using Plugin.FirebasePushNotification;
+using System.Threading.Tasks;
+using TicketerApp.APIConnector.Fcm;
+using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -6,14 +9,16 @@ namespace TicketerApp
 {
     public partial class App : Application
     {
+        FcmTokenManager _manager;
         public App()
         {
             InitializeComponent();
+            _manager = new FcmTokenManager();
+            LoggedInCheck();
         }
         protected override void OnStart()
         {
             SetTheme();
-            LoggedInCheck();
         }
 
         protected override void OnSleep()
@@ -38,6 +43,18 @@ namespace TicketerApp
             }
             if (isLoggedIn)
             {
+                string fcmToken = Preferences.Get("fcm_token", null);
+                if(fcmToken == null)
+                {
+                    fcmToken = CrossFirebasePushNotification.Current.Token;
+
+                }
+                string authToken = Preferences.Get("token", null);
+                if(authToken == null)
+                {
+                    return;
+                }
+                _manager.SendFcmToken(fcmToken, authToken).Wait(1000);
                 double currentTimeStamp = UnixStampToDateTimeConverter.GetCurrentUnixTimeStamp();
                 double expires_at = Preferences.Get("expires_at", currentTimeStamp);
                 SuccessfulLoginRegistrationResponseModel model = new SuccessfulLoginRegistrationResponseModel() { Token = Preferences.Get("token", null), ExpiresAt = expires_at };
@@ -49,6 +66,9 @@ namespace TicketerApp
             }
         }
         
+
+
+
         private void SetTheme()
         {
             string themeName = Preferences.Get("theme", "bright");
