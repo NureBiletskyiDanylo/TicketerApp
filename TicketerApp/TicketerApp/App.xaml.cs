@@ -1,4 +1,5 @@
 ﻿using Plugin.FirebasePushNotification;
+using System;
 using System.Threading.Tasks;
 using TicketerApp.APIConnector.Fcm;
 using TicketerApp.APIConnector.RequestModels;
@@ -44,7 +45,7 @@ namespace TicketerApp
             if (isLoggedIn)
             {
                 string fcmToken = Preferences.Get("fcm_token", null);
-                if(fcmToken == null)
+                if(fcmToken == null || fcmToken != CrossFirebasePushNotification.Current.Token)
                 {
                     fcmToken = CrossFirebasePushNotification.Current.Token;
 
@@ -54,6 +55,7 @@ namespace TicketerApp
                 {
                     return;
                 }
+                CrossFirebasePushNotification.Current.OnNotificationReceived += notR;
                 _manager.SendFcmToken(fcmToken, authToken).Wait(1000);
                 double currentTimeStamp = UnixStampToDateTimeConverter.GetCurrentUnixTimeStamp();
                 double expires_at = Preferences.Get("expires_at", currentTimeStamp);
@@ -65,7 +67,11 @@ namespace TicketerApp
                 MainPage = new NavigationPage(new Login());
             }
         }
-        
+
+        private void notR(object source, FirebasePushNotificationDataEventArgs e)
+        {
+            MainPage.DisplayAlert("ALERT", "ALERT", "ALERT");
+        }
 
 
 

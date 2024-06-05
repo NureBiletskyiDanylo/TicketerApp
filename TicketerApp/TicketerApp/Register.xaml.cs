@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Plugin.FirebasePushNotification;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using TicketerApp.APIConnector;
+using TicketerApp.APIConnector.Fcm;
 using TicketerApp.APIConnector.RequestModels;
 using TicketerApp.Behaviors;
 using Xamarin.CommunityToolkit.Behaviors;
@@ -13,6 +15,7 @@ namespace TicketerApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Register : ContentPage
     {
+        FcmTokenManager _tokenManager;
         Entry _emailEntry;
         Entry _passwordEntry;
         Entry _firstNameEntry;
@@ -22,7 +25,7 @@ namespace TicketerApp
         {
             InitializeComponent();
             _requestManager = new RequestManager();
-
+            _tokenManager = new FcmTokenManager();
             _emailEntry = (Entry)FindByName("EmailEntry");
             _passwordEntry = (Entry)FindByName("PasswordEntry");
             _firstNameEntry = (Entry)FindByName("FirstNameEntry");
@@ -61,6 +64,8 @@ namespace TicketerApp
             await _requestManager.RegisterSimpleRequest(model);
             if(_requestManager.SuccessfulAuthResponseModel != null)
             {
+                string fcmToken = CrossFirebasePushNotification.Current.Token;
+                await _tokenManager.SendFcmToken(fcmToken, _requestManager.SuccessfulAuthResponseModel.Token);
                 Application.Current.MainPage = new NavigationPage(new MainPage(_requestManager.SuccessfulAuthResponseModel));
             }
         }
