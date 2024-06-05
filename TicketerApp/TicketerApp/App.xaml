@@ -63,7 +63,7 @@
         <Color x:Key="entryTextValidColorBright">Black</Color>
 
         <Color x:Key="loginRegisterButtonColorDark">#2ceeba</Color>
-        <Color x:Key="loginRegisterButtonColorBright">DarkGray</Color>
+        <Color x:Key="loginRegisterButtonColorBright">#6495ED</Color>
 
         <Color x:Key="ticketTemplateColorDark">White</Color>
         <Color x:Key="ticketTemplateColorBright">White</Color>
