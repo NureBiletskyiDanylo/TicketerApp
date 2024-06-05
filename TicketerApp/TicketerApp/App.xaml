@@ -12,11 +12,11 @@
         <Color x:Key="backgroundTabViewDark">#2f333c</Color>
         <Color x:Key="backgroundTabViewDefault">#fafafa</Color>
 
-        <Color x:Key="backgroundTabViewItemBright">DeepSkyBlue</Color>
+        <Color x:Key="backgroundTabViewItemBright">#8CC5FC</Color>
         <Color x:Key="backgroundTabViewItemDark">#24272e</Color>
         <Color x:Key="backgroundTabViewItemDefault">DeepSkyBlue</Color>
 
-        <Color x:Key="headerAndPlainTextColorBright">Black</Color>
+        <Color x:Key="headerAndPlainTextColorBright">White</Color>
         <Color x:Key="headerAndPlainTextColorDark">#828a9a</Color>
         <Color x:Key="headerAndPlainTextColorDefault">Black</Color>
 
@@ -63,7 +63,7 @@
         <Color x:Key="entryTextValidColorBright">Black</Color>
 
         <Color x:Key="loginRegisterButtonColorDark">#2ceeba</Color>
-        <Color x:Key="loginRegisterButtonColorBright">DarkGray</Color>
+        <Color x:Key="loginRegisterButtonColorBright">#6495ED</Color>
 
         <Color x:Key="ticketTemplateColorDark">White</Color>
         <Color x:Key="ticketTemplateColorBright">White</Color>

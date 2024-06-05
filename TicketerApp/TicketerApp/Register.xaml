@@ -137,7 +137,7 @@
                         Clicked="OnRegisterButtonClicked"
                         Style="{StaticResource mainButtonStyle}"
                         Text="REGISTER"
-                        TextColor="Black" />
+                        TextColor="White" />
                 </StackLayout>
             </Frame>
         </StackLayout>
